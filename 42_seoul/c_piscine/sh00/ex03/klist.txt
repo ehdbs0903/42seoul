@@ -1,0 +1,12 @@
+Credentials cache: API:0A9FA672-D19F-450D-8863-93BE97B27A5B
+        Principal: doykim@42SEOUL.KR
+
+  Issued                Expires               Principal
+Jan  3 13:05:47 2022  Jan  3 23:05:47 2022  krbtgt/42SEOUL.KR@42SEOUL.KR
+Jan  3 13:05:49 2022  Jan  3 23:05:47 2022  HTTP/student-storage.42seoul.kr@42SEOUL.KR
+Credentials cache: API:BEC568C5-07FE-4916-A742-A8145668B7D4
+        Principal: doykim@42SEOUL.KR
+
+  Issued                Expires               Principal
+Jan  4 08:21:56 2022  Jan  4 18:21:56 2022  krbtgt/42SEOUL.KR@42SEOUL.KR
+Jan  4 08:21:58 2022  Jan  4 18:21:56 2022  HTTP/student-storage.42seoul.kr@42SEOUL.KR
