@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: doykim <doykim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/15 15:35:23 by doykim            #+#    #+#             */
-/*   Updated: 2022/03/15 15:45:21 by doykim           ###   ########.fr       */
+/*   Created: 2022/04/26 16:03:44 by doykim            #+#    #+#             */
+/*   Updated: 2022/04/26 18:45:59 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s1)
+void	ft_putstr_fd(char *s, int fd)
 {
-	char	*ptr;
-
-	ptr = malloc(ft_strlen(s1));
-	if (!ptr)
-		return (0);
-	ft_strlcpy(ptr, s1, ft_strlen(s1));
-	return (ptr);
+	if (fd < 0)
+		return ;
+	if (!s)
+		return ;
+	write(fd, s, ft_strlen(s));
 }

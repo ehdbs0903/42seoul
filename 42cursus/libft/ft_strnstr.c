@@ -1,40 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: doykim <doykim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/11 18:54:48 by doykim            #+#    #+#             */
-/*   Updated: 2022/03/15 16:34:05 by doykim           ###   ########.fr       */
+/*   Created: 2022/03/11 18:46:04 by doykim            #+#    #+#             */
+/*   Updated: 2022/04/26 19:00:59 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char *str)
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	int		minus;
-	long	result;
+	size_t	i;
+	size_t	j;
 
-	while ((*str >= 9 && *str <= 13) || *str == 32)
-		str++;
-	minus = 0;
-	if (*str == '-')
+	i = 0;
+	j = 0;
+	if (needle[0] == '\0')
+		return ((char *)haystack + i);
+	while (i < len && haystack[i] != '\0')
 	{
-		minus = 1;
-		str++;
+		if (haystack[i] == needle[0])
+		{
+			while (haystack[i + j] == needle[j] && (i + j) < len
+				&& haystack[i + j] != '\0')
+				j++;
+			if (needle[j] == '\0')
+				return ((char *)haystack + i);
+		}
+		j = 0;
+		i++;
 	}
-	else if (*str == '+')
-		str++;
-	result = 0;
-	while (*str >= '0' && *str <= '9')
-		result = result * 10 + *str++ - '0';
-	if (minus)
-		result *= -1;
-	if (result > 2147483647)
-		return (-1);
-	else if (result < -2147483648)
-		return (0);
-	return ((int)result);
+	return (NULL);
 }
