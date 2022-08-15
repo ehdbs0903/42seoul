@@ -6,7 +6,7 @@
 /*   By: doykim <daykim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 17:46:37 by doykim            #+#    #+#             */
-/*   Updated: 2022/08/15 18:52:19 by doykim           ###   ########.fr       */
+/*   Updated: 2022/08/15 19:29:57 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*ft_uitoa(unsigned int n)
 	return (num);
 }
 
-int	ft_print_unsigned(unsigned int n)
+int	ft_print_u(unsigned int n)
 {
 	int		len;
 	char	*num;
