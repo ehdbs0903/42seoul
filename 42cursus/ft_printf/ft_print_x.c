@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_x.c                                          :+:      :+:    :+:   */
+/*   ft_print_x.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: doykim <daykim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 17:46:50 by doykim            #+#    #+#             */
-/*   Updated: 2022/08/14 17:52:30 by doykim           ###   ########.fr       */
+/*   Updated: 2022/08/15 19:29:45 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	ft_put_hex(unsigned int num, const char format)
 	}
 }
 
-int	ft_print_hex(unsigned int num, const char format)
+int	ft_print_x(unsigned int num, const char format)
 {
 	if (num == 0)
 		return (write(1, "0", 1));
