@@ -6,7 +6,7 @@
 /*   By: doykim <doykim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 17:03:32 by doykim            #+#    #+#             */
-/*   Updated: 2022/08/15 20:31:28 by doykim           ###   ########.fr       */
+/*   Updated: 2022/08/16 12:15:28 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,19 @@
 int	ft_parse_format(va_list *ap, char format)
 {
 	if (format == 'c')
-		return ft_print_c(va_arg(*ap, int));
+		return (ft_print_c(va_arg(*ap, int)));
 	else if (format == 's')
-		return ft_print_s(va_arg(*ap, char *));
+		return (ft_print_s(va_arg(*ap, char *)));
 	else if (format == 'p')
-		return ft_print_p(va_arg(*ap, unsigned long long));
+		return (ft_print_p(va_arg(*ap, unsigned long long)));
 	else if (format == 'd' || format == 'i')
-		return ft_print_di(va_arg(*ap, int));
+		return (ft_print_di(va_arg(*ap, int)));
 	else if (format == 'u')
-		return ft_print_u(va_arg(*ap, unsigned int));
+		return (ft_print_u(va_arg(*ap, unsigned int)));
 	else if (format == 'x' || format == 'X')
-		return ft_print_x(va_arg(*ap, unsigned int), format);
+		return (ft_print_x(va_arg(*ap, unsigned int), format));
 	else if (format == '%')
-		return write(1, "%", 1);
+		return (write(1, "%", 1));
 	else
 		return (-1);
 }
