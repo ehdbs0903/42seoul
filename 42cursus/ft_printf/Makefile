@@ -27,12 +27,9 @@ $(TARGET) : $(OBJ)
 clean:
 	$(RM) $(OBJ)
 
-fclean:
-	make clean 
+fclean: clean
 	$(RM) $(TARGET)
 
-re:
-	make fclean
-	make all
+re: fclean all
 
 .PHONY: all clean fclean bonus
