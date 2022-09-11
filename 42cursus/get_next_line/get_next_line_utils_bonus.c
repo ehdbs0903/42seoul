@@ -6,7 +6,7 @@
 /*   By: doykim <daykim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 17:37:15 by doykim            #+#    #+#             */
-/*   Updated: 2022/09/10 17:37:20 by doykim           ###   ########.fr       */
+/*   Updated: 2022/09/11 23:08:35 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ char	*ft_get_line(char *left_str)
 	return (str);
 }
 
-char	*ft_new_left_str(char *left_str)
+char	*ft_new_str(char *left_str)
 {
 	int		i;
 	int		j;
