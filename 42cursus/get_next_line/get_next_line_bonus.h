@@ -6,7 +6,7 @@
 /*   By: doykim <daykim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 17:35:06 by doykim            #+#    #+#             */
-/*   Updated: 2022/09/10 17:36:28 by doykim           ###   ########.fr       */
+/*   Updated: 2022/09/11 23:07:41 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@
 # endif
 
 char	*get_next_line(int fd);
-char	*ft_read_to_left_str(int fd, char *left_str);
+char	*ft_read_to_str(int fd, char *left_str);
 char	*ft_strchr(char *s, int c);
 size_t	ft_strlen(char *s);
 char	*ft_strjoin(char *left_str, char *buff);
 char	*ft_get_line(char *left_str);
-char	*ft_new_left_str(char *left_str);
+char	*ft_new_str(char *left_str);
 
 #endif
