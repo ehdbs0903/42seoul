@@ -6,25 +6,19 @@
 /*   By: doykim <daykim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 21:59:16 by doykim            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/09/13 23:19:06 by doykim           ###   ########.fr       */
-=======
->>>>>>> 2cd21be9b4193e46dab2969a66d26067cf479769
+/*   Updated: 2022/09/13 23:51:49 by doykim           ###   ########.fr       */
 /*   Updated: 2022/09/13 22:11:25 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_minitalk.h"
 
-int	main(int ac, char **av)
+int	main(int argc, char **argv)
 {
 	int	pid;
 
 	pid = getpid();
-<<<<<<< HEAD
-	ft_printf("server pid: %d", pid);
-
-	return 0;
-=======
->>>>>>> 2cd21be9b4193e46dab2969a66d26067cf479769
+	ft_printf("server pid: %d\n", pid);
+	kill(ft_atoi(argv[1]), SIGKILL);
+	return (0);
 }
