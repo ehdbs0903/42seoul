@@ -6,7 +6,7 @@
 /*   By: doykim <daykim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 21:59:16 by doykim            #+#    #+#             */
-/*   Updated: 2022/09/20 10:14:41 by doykim           ###   ########.fr       */
+/*   Updated: 2022/09/20 11:18:24 by doykim           ###   ########.fr       */
 /*   Updated: 2022/09/13 22:11:25 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -63,8 +63,8 @@ void	action(int sig, siginfo_t *info, void *context)
 
 int	main(void)
 {
-	int	pid;
-	struct sigaction act;
+	int					pid;
+	struct sigaction	act;
 
 	pid = getpid();
 	ft_printf("server pid: %d\n", pid);
