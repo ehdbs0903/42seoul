@@ -6,7 +6,7 @@
 /*   By: doykim <daykim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 22:00:45 by doykim            #+#    #+#             */
-/*   Updated: 2022/09/20 08:19:51 by doykim           ###   ########.fr       */
+/*   Updated: 2022/09/20 10:20:16 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	signal_error(void)
 {
-	ft_printf("\nclient: unexpected error.\n");
-	exit(EXIT_FAILURE);
+	ft_printf("error.\n");
+	exit(1);
 }
 
 void	char_to_bin(unsigned char c, int pid)
@@ -58,8 +58,8 @@ void	recieved(int sig)
 
 	if (sig == SIGUSR1)
 	{
-		ft_printf("%s%d signal sent successfully!%s\n", ++sent);
-		exit(EXIT_SUCCESS);
+		ft_printf("%d signal sent\n", ++sent);
+		exit(0);
 	}
 	if (sig == SIGUSR2)
 		++sent;
@@ -77,10 +77,9 @@ int main(int ac, char **av)
 		signal(SIGUSR1, recieved);
 		signal(SIGUSR2, recieved);
 		server_pid = ft_atoi(av[1]);
-		ft_printf("Text currently sending.. \n");
 		sent_text(av[2], server_pid);
 	}
 	else
-		ft_printf("usage: ./client <server_pid> <text to send>\n");
-	return (EXIT_FAILURE);
+		ft_printf("error\n");
+	return (1);
 }
