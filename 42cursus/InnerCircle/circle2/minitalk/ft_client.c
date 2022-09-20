@@ -6,7 +6,7 @@
 /*   By: doykim <daykim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 22:00:45 by doykim            #+#    #+#             */
-/*   Updated: 2022/09/20 10:20:16 by doykim           ###   ########.fr       */
+/*   Updated: 2022/09/20 11:19:31 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	recieved(int sig)
 		++sent;
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	int	server_pid;
 	int	client_pid;
