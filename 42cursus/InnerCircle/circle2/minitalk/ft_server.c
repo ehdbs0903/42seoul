@@ -6,18 +6,12 @@
 /*   By: doykim <daykim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 21:59:16 by doykim            #+#    #+#             */
-/*   Updated: 2022/09/20 08:19:15 by doykim           ###   ########.fr       */
+/*   Updated: 2022/09/20 10:14:41 by doykim           ###   ########.fr       */
 /*   Updated: 2022/09/13 22:11:25 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_minitalk.h"
-
-void	signal_error(void)
-{
-	ft_printf("\nserver: unexpected error.\n");
-	exit(EXIT_FAILURE);
-}
 
 void	extended_action(char *c, int *received, int *client_pid, int *bit)
 {
@@ -29,7 +23,10 @@ void	extended_action(char *c, int *received, int *client_pid, int *bit)
 		*received = 0;
 		*c = 0;
 		if (kill(*client_pid, SIGUSR1) == -1)
-			signal_error();
+		{
+			ft_printf("error.\n");
+			exit(1);
+		}
 		return ;
 	}
 	*bit = 0;
@@ -80,5 +77,5 @@ int	main(void)
 		sigaction(SIGUSR2, &act, 0);
 		pause();
 	}
-	return (EXIT_FAILURE);
+	return (0);
 }
