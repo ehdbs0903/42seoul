@@ -26,11 +26,9 @@ all: $(LIBFTPRINTF) $(CLIENT) $(SERVER)
 
 $(SERVER): $(OBJ_S) $(INC)
 	@ $(CC) $(CFLAGS) $(LIBFTPRINTF) -o $@ $(OBJ_S)
-	@printf "$(_SUCCESS) server ready.\n"
 
 $(CLIENT): $(OBJ_C) $(INC)
 	@ $(CC) $(CFLAGS) $(LIBFTPRINTF) -o $@ $(OBJ_C)
-	@printf "$(_SUCCESS) client ready.\n"
 
 %.o: %.c
 	@ $(CC) $(CFLAGS) -c $< -o $@
@@ -41,14 +39,13 @@ $(LIBFTPRINTF):
 clean:
 	@ $(MAKE) clean -C $(LIBFTPRINTF_DIR)
 	@ $(RM) $(OBJ_C) $(OBJ_S)
-	@printf "$(_INFO) object files removed.\n"
 
 fclean: clean
 	@ $(MAKE) fclean -C $(LIBFTPRINTF_DIR)
 	@ $(RM) $(CLIENT) $(SERVER)
-	@printf "$(_INFO) client removed.\n"
-	@printf "$(_INFO) server removed.\n"
 
-re: fclean all
+re: 
+	make fclean
+	make all
 
 .PHONY: all clean fclean re
