@@ -11,16 +11,9 @@ OBJ_S	=	ft_server.o
 OBJ_C	=	ft_client.o
 INC		=	ft_minitalk.h
 
-CC			=	gcc
+CC			=	cc
 CFLAG		=	-Wall -Wextra -Werror
 RM			=	rm -rf
-
-#Colors:
-GREEN		=	\e[38;5;118m
-YELLOW		=	\e[38;5;226m
-RESET		=	\e[0m
-_SUCCESS	=	[$(GREEN)SUCCESS$(RESET)]
-_INFO		=	[$(YELLOW)INFO$(RESET)]
 
 all: $(LIBFTPRINTF) $(CLIENT) $(SERVER)
 
