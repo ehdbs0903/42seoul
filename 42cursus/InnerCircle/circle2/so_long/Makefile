@@ -15,10 +15,10 @@ INC = ft_so_long.h
 all: $(MLX) $(NAME)
 
 $(NAME): $(OBJS) $(INC)
-	$(CC) $(CFLAGS) $(MLX) -o $@ $(OBJS)
+	$(CC) $(OBJS) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $@
 
 %.o : %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -Imlx  -c $< -o $@
 
 $(MLX):
 	$(MAKE) -C $(MLX_DIR)
