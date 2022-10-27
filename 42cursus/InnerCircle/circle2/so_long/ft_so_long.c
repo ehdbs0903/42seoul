@@ -6,7 +6,7 @@
 /*   By: doykim <daykim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 16:43:37 by doykim            #+#    #+#             */
-/*   Updated: 2022/10/05 21:27:28 by doykim           ###   ########.fr       */
+/*   Updated: 2022/10/28 01:37:29 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,12 @@ int	main(int ac, char **av)
 	
 	if (check_argument(ac, av) == -1)
 		print_error();
-	init_game(&game);
+	//init_game(&game);
 	game.mlx = mlx_init();
 	read_map(av[1], &game);
-	game.win = mlx_new_window(game.mlx, game.width * 64, game.height * 64, "mlx 42");
+	game.win = mlx_new_window(game.mlx, game.width * 50, game.height * 50, "mlx 42");
 	init_img(&game);
-	set_img(&game);
+	set_map_img(&game);
 	mlx_loop(game.mlx);	
 	return (0);
 }
