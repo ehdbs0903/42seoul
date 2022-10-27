@@ -6,7 +6,7 @@
 /*   By: doykim <doykim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 16:23:03 by doykim            #+#    #+#             */
-/*   Updated: 2022/10/05 21:27:30 by doykim           ###   ########.fr       */
+/*   Updated: 2022/10/28 01:37:31 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,19 @@ void	init_img(t_game *game)
 	int	width;
 	int	height;
 
-	game->grass = mlx_xpm_file_to_image(game->mlx, "./img/Grass.xpm", &width, &height);
-	game->rock = mlx_xpm_file_to_image(game->mlx, "./img/Rock.xpm", &width, &height);
-	game->blue_orb = mlx_xpm_file_to_image(game->mlx, "./images/Blue_orb.xpm", &width, &height);
-	game->red_orb = mlx_xpm_file_to_image(game->mlx, "./images/Red_orb.xpm", &width, &height);
+	game->floor = mlx_xpm_file_to_image(game->mlx, "./img/floor.xpm", &width, &height);
+	game->wall = mlx_xpm_file_to_image(game->mlx, "./img/wall.xpm", &width, &height);
+	game->collect = mlx_xpm_file_to_image(game->mlx, "./img/collect.xpm", &width, &height);
+	game->exit = mlx_xpm_file_to_image(game->mlx, "./img/exit.xpm", &width, &height); 
+	game->o_exit = mlx_xpm_file_to_image(game->mlx, "./img/o_exit.xpm", &width, &height);
+	game->player.front = mlx_xpm_file_to_image(game->mlx, "./img/front.xpm", &width, &height);
+	game->player.back = mlx_xpm_file_to_image(game->mlx, "./img/back.xpm", &width, &height);
+	game->player.left = mlx_xpm_file_to_image(game->mlx, "./img/left.xpm", &width, &height);
+	game->player.right = mlx_xpm_file_to_image(game->mlx, "./img/right.xpm", &width, &height);
+
 }
 
-void	set_img(t_game *game)
+void	set_map_img(t_game *game)
 {
 	int		h;
 	int		w;
@@ -34,16 +40,15 @@ void	set_img(t_game *game)
 		w = 0;
 		while (w < game->width)
 		{
+			mlx_put_image_to_window(game->mlx, game->win, game->floor, w * 50, h * 50);
 			if (game->map[h * game->width + w] == '1')
-				mlx_put_image_to_window(game->mlx, game->win, game->rock, w * 64, h * 64);
+				mlx_put_image_to_window(game->mlx, game->win, game->wall, w * 50, h * 50);
 			else if (game->map[h * game->width + w] == 'C')
-				mlx_put_image_to_window(game->mlx, game->win, game->blue_orb, w * 64, h * 64);
-			//else if (game->map[h * game->width + w] == 'P')
-				//mlx_put_image_to_window(game->mlx, game->win, game->img_chara, w * 64, h * 64);
+				mlx_put_image_to_window(game->mlx, game->win, game->collect, w * 50, h * 50);
+			else if (game->map[h * game->width + w] == 'P')
+				mlx_put_image_to_window(game->mlx, game->win, game->player.front, w * 50, h * 50);
 			else if (game->map[h * game->width + w] == 'E')
-				mlx_put_image_to_window(game->mlx, game->win, game->red_orb, w * 64, h * 64);
-			else
-				mlx_put_image_to_window(game->mlx, game->win, game->grass, w * 64, h * 64);
+				mlx_put_image_to_window(game->mlx, game->win, game->exit, w * 50, h * 50);
 			w++;
 		}
 		h++;
