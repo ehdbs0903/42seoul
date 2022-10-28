@@ -11,8 +11,8 @@ MLX_DIR = mlx
 LIBFTPRINTF = ft_printf/libftprintf.a
 LIBFTPRINTF_DIR = ft_printf
 
-SRCS = ft_so_long.c ft_so_long_utils.c $(addprefix get_next_line/, get_next_line.c get_next_line_utils.c)
-OBJS = ft_so_long.o ft_so_long_utils.o $(addprefix get_next_line/, get_next_line.o get_next_line_utils.o)
+SRCS = ft_so_long.c ft_so_long_utils.c ft_so_long_utils2.c $(addprefix get_next_line/, get_next_line.c get_next_line_utils.c)
+OBJS = ft_so_long.o ft_so_long_utils.o ft_so_long_utils2.o $(addprefix get_next_line/, get_next_line.o get_next_line_utils.o)
 INC = ft_so_long.h
 
 all: $(MLX) $(LIBFTPRINTF) $(NAME)
