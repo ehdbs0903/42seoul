@@ -5,10 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: doykim <doykim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/28 18:12:01 by doykim            #+#    #+#             */
-/*   Updated: 2022/10/28 18:28:54 by doykim           ###   ########.fr       */
+/*   Created: 2022/10/28 20:34:28 by doykim            #+#    #+#             */
+/*   Updated: 2022/10/28 20:36:35 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "ft_so_long.h"
 
 void	put_img(t_game *game, void *img, int w, int h)
 {
