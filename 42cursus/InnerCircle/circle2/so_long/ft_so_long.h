@@ -6,7 +6,7 @@
 /*   By: doykim <daykim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 16:44:29 by doykim            #+#    #+#             */
-/*   Updated: 2022/10/28 18:45:35 by doykim           ###   ########.fr       */
+/*   Updated: 2022/10/30 17:46:27 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,11 @@ typedef struct s_game
 	void		*wall;
 	void		*collect;
 	void		*exit;
+	void		*monster;
 	t_player	player;
 }	t_game;
 
-void	print_error(int n);
+void	exit_game(int n);
 int		check_argument(int ac, char **av);
 void	init_img(t_game *game);
 void	set_map_img(t_game *game);
