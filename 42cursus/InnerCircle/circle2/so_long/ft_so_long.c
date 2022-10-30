@@ -6,16 +6,29 @@
 /*   By: doykim <daykim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 16:43:37 by doykim            #+#    #+#             */
-/*   Updated: 2022/10/28 18:45:30 by doykim           ###   ########.fr       */
+/*   Updated: 2022/10/30 16:50:23 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_so_long.h"
 
-void	print_error(int n)
+void	exit_game(int n)
 {
-	ft_printf("Error");
-	exit(n);
+	if (n == 1)
+	{
+		ft_printf("Error");
+		exit(1);
+	}
+	else if (n == 0)
+	{
+		ft_printf("Success");
+		exit(0);
+	}
+	else
+	{
+		ft_printf("Fail");
+		exit(0);
+	}
 }
 
 int	check_argument(int ac, char **av)
@@ -48,13 +61,12 @@ int	main(int ac, char **av)
 	t_game	game;
 
 	if (check_argument(ac, av) == -1)
-		print_error(1);
+		exit_game(1);
 	game.mlx = mlx_init();
-	game.win = mlx_new_window(game.mlx, game.width * 50, game.height * 50,
-			"mlx 42");
 	init_game(&game);
 	read_map(av[1], &game);
-	init_img(&game);
+	game.win = mlx_new_window(game.mlx, game.width * 50, game.height * 50,
+			"mlx 42");
 	set_map_img(&game);
 	mlx_hook(game.win, X_EVENT_KEY_RELEASE, 0, &key_press, &game);
 	mlx_loop(game.mlx);
