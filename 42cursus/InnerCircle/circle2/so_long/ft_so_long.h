@@ -6,7 +6,7 @@
 /*   By: doykim <daykim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 16:44:29 by doykim            #+#    #+#             */
-/*   Updated: 2022/10/30 17:48:13 by doykim           ###   ########.fr       */
+/*   Updated: 2022/11/01 17:09:33 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,7 @@
 # include "get_next_line/get_next_line.h"
 # include <fcntl.h>
 
-# define X_EVENT_KEY_PRESS			2
-# define X_EVENT_KEY_RELEASE		3
-
 # define KEY_ESC	53
-# define KEY_W		13
-# define KEY_A		0
-# define KEY_S		1
-# define KEY_D		2
 
 typedef struct s_player
 {
@@ -41,6 +34,9 @@ typedef struct s_game
 {
 	int			width;
 	int			height;
+	int			img_w;
+	int			img_h;
+	int			m_cnt;
 	int			c_cnt;
 	int			e_cnt;
 	int			p_cnt;
@@ -57,12 +53,12 @@ typedef struct s_game
 }	t_game;
 
 void	exit_game(int n);
-int		check_argument(int ac, char **av);
 void	init_img(t_game *game);
 void	set_map_img(t_game *game);
 void	read_map(char *filename, t_game *game);
 int		key_press(int keycode, t_game *game);
 void	check_map(t_game *game);
 void	put_img(t_game *game, void *img, int w, int h);
+void	draw_text(t_game *game);
 
 #endif
