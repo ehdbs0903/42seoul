@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_so_long_utils.c                                 :+:      :+:    :+:   */
+/*   img_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: doykim <doykim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 16:23:03 by doykim            #+#    #+#             */
-/*   Updated: 2022/10/30 17:48:09 by doykim           ###   ########.fr       */
+/*   Updated: 2022/11/01 17:07:17 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ void	init_img(t_game *game)
 			&width, &height);
 	game->player.right = mlx_xpm_file_to_image(game->mlx, "./img/right.xpm",
 			&width, &height);
-	game->monster = mlx_xpm_file_to_image(game->mlx, "./img/monster.xpm",
-			&width, &height);
 }
 
 void	set_map_img(t_game *game)
@@ -57,11 +55,7 @@ void	set_map_img(t_game *game)
 				put_img(game, game->player.front, w, h);
 			else if (game->map[h * game->width + w] == 'E')
 				put_img(game, game->exit, w, h);
-			else if (game->map[h * game->width + w] == 'M')
-				put_img(game, game->monster, w, h);
-			else if (game->map[h * game->width + w] == '0')
-				continue ;
-			else
+			else if (game->map[h * game->width + w] != '0')
 				exit_game(1);
 		}
 	}
@@ -77,7 +71,6 @@ void	read_map(char *filename, t_game *game)
 	if (fd == -1)
 		exit_game(1);
 	line = get_next_line(fd);
-	game->height = 0;
 	game->width = ft_strlen(line) - 1;
 	game->map = line;
 	game->map[ft_strlen(game->map) - 1] = 0;
@@ -95,11 +88,9 @@ void	read_map(char *filename, t_game *game)
 		}
 	}
 	close(fd);
-	check_map(game);
-	ft_printf("%s\n", game->map);
 }
 
-void	count_pce(t_game *game, int h, int w)
+static	void	count_pce(t_game *game, int h, int w)
 {
 	if (game->map[h * game -> width + w] == 'P')
 	{
