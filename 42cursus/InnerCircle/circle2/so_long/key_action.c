@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_so_long_utils2.c                                :+:      :+:    :+:   */
+/*   key_action.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: doykim <doykim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 01:36:58 by doykim            #+#    #+#             */
-/*   Updated: 2022/10/30 17:48:11 by doykim           ###   ########.fr       */
+/*   Updated: 2022/11/01 16:16:01 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_so_long.h"
 
-void	move(t_game *game, t_player player, int dy, int dx)
+static	void	move(t_game *game, t_player player, int dy, int dx)
 {
 	if (game->map[(player.y + dy) * game->width + player.x + dx] != '1')
 	{	
-		if (game->map[(player.y + dy) * game->width + player.x + dx] == 'M')
-			exit_game(2);
 		if (game->map[(player.y + dy) * game->width + player.x + dx] == 'C')
 		{
 			game->c_cnt -= 1;
 			if (!game->c_cnt)
 				game->e_flag = 1;
+			game->map[(player.y + dy) * game->width + player.x + dx] = '0';
 		}
 		if (game->map[(player.y + dy) * game->width + player.x + dx] == 'E')
 		{
@@ -36,37 +35,34 @@ void	move(t_game *game, t_player player, int dy, int dx)
 		put_img(game, game->player.back, player.x + dx, player.y + dy);
 		game->player.x += dx;
 		game->player.y += dy;
+		game->m_cnt += 1;
 	}
 }
 
 int	key_press(int keycode, t_game *game)
 {
-	if (keycode == KEY_W || keycode == KEY_S
-		|| keycode == KEY_A || keycode == KEY_D)
+	if (keycode == 13)
 	{
-		if (keycode == KEY_W)
-		{
-			move(game, game->player, -1, 0);
-			put_img(game, game->player.back, game->player.x, game->player.y);
-		}
-		else if (keycode == KEY_S)
-		{
-			move(game, game->player, 1, 0);
-			put_img(game, game->player.front, game->player.x, game->player.y);
-		}
-		else if (keycode == KEY_A)
-		{
-			move(game, game->player, 0, -1);
-			put_img(game, game->player.left, game->player.x, game->player.y);
-		}
-		else if (keycode == KEY_D)
-		{
-			move(game, game->player, 0, 1);
-			put_img(game, game->player.right, game->player.x, game->player.y);
-		}
+		move(game, game->player, -1, 0);
+		put_img(game, game->player.back, game->player.x, game->player.y);
+	}
+	else if (keycode == 1)
+	{
+		move(game, game->player, 1, 0);
+		put_img(game, game->player.front, game->player.x, game->player.y);
+	}
+	else if (keycode == 0)
+	{
+		move(game, game->player, 0, -1);
+		put_img(game, game->player.left, game->player.x, game->player.y);
+	}
+	else if (keycode == 2)
+	{
+		move(game, game->player, 0, 1);
+		put_img(game, game->player.right, game->player.x, game->player.y);
 	}
 	else if (keycode == KEY_ESC)
-		exit(0);
-	ft_printf("x: %d, y: %d\n", game->player.x, game->player.y);
+		exit(2);
+	draw_text(game);
 	return (0);
 }
