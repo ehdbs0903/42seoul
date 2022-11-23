@@ -1,35 +1,27 @@
-SRC_FILE = philosophers.c ../src/ft_putstr_fd.c ../src/ft_putchar_fd.c ../src/ft_isdigit.c ../src/ft_atoi.c \
-	philo_init.c utils.c
-
-OBJ_FILE = $(SRC_FILE:.c=.o)
-
 NAME = philo
+
+SRCS = main.c time.c philo.c thread.c mutex.c status.c dinner.c utils.c free.c
 
 CC = gcc
 
-RED = \033[0;31m
+CFLAGS = -Wall -Werror -Wextra -g -pthread
 
-RESET = \033[0m
+FLAGS_DATARACE = -fsanitize=thread -g
 
-CYAN = \033[0;36m
+all: $(NAME)
 
-YELLOW = \033[0;33m
+$(NAME): $(SRCS)
+	$(CC) $(CFLAGS) $(SRCS) -o $(NAME)
 
-CFLAGS = -Wall -Werror -Wextra
+data_race:
+	$(CC) $(FLAGS_DATARACE) $(SRCS) -o $(NAME)
 
-all : $(NAME) philosophers.h
+clean:
+	rm -rf *.dSYM
 
-%.o:%.c
-	@echo "$(CYAN)                          <----------- COMPILING $< ----------->$(RESET)"
-	@$(CC) $(CFLAGS) -c $< -o $@
+fclean: clean
+	rm -rf $(NAME)
 
-$(NAME) : $(OBJ_FILE)
-	@$(CC) $(CFLAGS) $(OBJ_FILE)  -lpthread -o $(NAME)
-clean :
-	@echo "$(YELLOW)                        <----------- REMOVING OBJECT FILES ----------->$(RESET)"
-	@rm -rf $(OBJ_FILE)
-fclean : clean
-	@echo "$(YELLOW)                        <----------- REMOVING ALL ----------->$(RESET)"
-	@rm -rf $(NAME) $(BONUS)
-re : fclean all
-.PHONY : clean fclean re
+re: fclean all
+
+.PHONY: all clean fclean re
