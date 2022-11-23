@@ -3,61 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: doykim <doykim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: mcakay <mcakay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/22 16:17:25 by doykim            #+#    #+#             */
-/*   Updated: 2022/11/22 16:17:27 by doykim           ###   ########.fr       */
+/*   Created: 2022/10/08 01:04:08 by mcakay            #+#    #+#             */
+/*   Updated: 2022/10/12 02:54:51 by mcakay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "philo.h"
 
-void	mutex_print(int id, t_args *args, char *message)
+long	ft_atol(const char *str)
 {
-	pthread_mutex_lock(&args->print);
-	printf("\033[0;36mMs : %lu \e[0m| Philo Id: [%d] \033[0;33m%s\033[0m\n",
-		get_current_time() - args->time, id, message);
-	pthread_mutex_unlock(&args->print);
-}
+	int		i;
+	long	nb;
+	int		sign;
 
-void	*checke_if_dead(void *philo)
-{
-	t_philo	*philosopher;
-
-	philosopher = (t_philo *)philo;
-	while (1)
+	i = 0;
+	nb = 0;
+	sign = 1;
+	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n' || str[i] == '\v'
+		|| str[i] == '\f' || str[i] == '\r')
+		i++;
+	if (str[i] == '-' || str[i] == '+')
 	{
-		if (get_current_time() >= philosopher->should_die + 5)
-		{
-			mutex_print(philosopher->philo_id, philosopher->args,
-				"philosopher is dead");
-			pthread_mutex_lock(&philosopher->args->print);
-			pthread_mutex_unlock(&philosopher->args->is_dead);
-		}
-		else if (philosopher->eat_max == 1)
-		{
-			pthread_mutex_lock(&philosopher->args->print);
-			pthread_mutex_unlock(&philosopher->args->is_dead);
-		}
+		if (str[i] == '-')
+			sign = -1;
+		i++;
 	}
-	return (NULL);
-}
-
-size_t	get_current_time(void)
-{
-	struct timeval	time;
-
-	gettimeofday(&time, NULL);
-	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
-}
-
-void	philo_init_utils(t_args *args, t_philo *philo, int i)
-{
-	pthread_mutex_init(&philo[i].fork, NULL);
-	philo[i].philo_id = i + 1;
-	philo[i].args = args;
-	if (i == args->philo_number - 1)
-		philo[i].next_fork = &philo[0].fork;
-	else
-		philo[i].next_fork = &philo[i + 1].fork;
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		nb = nb * 10 + str[i] - '0';
+		i++;
+	}
+	return (nb * sign);
 }
