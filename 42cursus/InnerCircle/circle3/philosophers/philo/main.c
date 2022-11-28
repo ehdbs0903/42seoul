@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcakay <mcakay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: doykim <doykim@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/07 09:15:01 by mcakay            #+#    #+#             */
-/*   Updated: 2022/10/12 02:36:22 by mcakay           ###   ########.fr       */
+/*   Created: 2022/11/22 09:15:01 by doykim            #+#    #+#             */
+/*   Updated: 2022/11/28 16:51:28 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	main(int argc, char **argv)
 	philo = malloc(sizeof(t_philo) * ft_atol(argv[1]));
 	forks = malloc(sizeof(pthread_mutex_t) * ft_atol(argv[1]));
 	death = malloc(sizeof(pthread_mutex_t));
-	if (!philo)
+	if (!death)
 		print_error(2);
 	ft_init_philos(philo, argc, argv);
 	ft_init_mutex(philo, argv, forks, death);
