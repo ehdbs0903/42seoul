@@ -1,8 +1,8 @@
 NAME = philo
 
-SRCS = main.c time.c thread.c status.c dinner.c utils.c free.c init.c
+SRCS = main.c philo.c utils.c free.c init.c
 
-CC = gcc
+CC = cc
 
 CFLAGS = -Wall -Werror -Wextra -g -pthread
 
