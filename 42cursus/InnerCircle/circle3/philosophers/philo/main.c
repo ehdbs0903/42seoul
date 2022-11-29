@@ -6,7 +6,7 @@
 /*   By: doykim <doykim@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 09:15:01 by doykim            #+#    #+#             */
-/*   Updated: 2022/11/28 16:51:28 by doykim           ###   ########.fr       */
+/*   Updated: 2022/11/29 16:12:58 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,12 @@ void	print_error(int n)
 	}
 	if (n == 2)
 	{
-		printf("malloc_error");		
+		printf("malloc_error");
+		exit(1);
 	}
 }
 
-static int	ft_check_args(int argc, char **argv)
+static int	check_args(int argc, char **argv)
 {
 	int	i;
 	int	j;
@@ -45,24 +46,71 @@ static int	ft_check_args(int argc, char **argv)
 	return (1);
 }
 
-int	main(int argc, char **argv)
+static void	check_end_conditions(t_philo *philo, t_variable *variable)
 {
-	t_philo			*philo;
-	pthread_mutex_t	*forks;
-	pthread_mutex_t	*death;
+	int	timestamp;
+	int	i;
 
-	if (argc < 5 || argc > 6)
+	i = -1;
+	while (++i < variable->num_of_philos)
+	{
+		timestamp = ret_timestamp(philo);
+		if ((timestamp - philo[i].last_meal_time) / 1000 >= \
+			variable->time_to_die)
+		{
+			variable->philo_alive = 0;
+			print_status(philo, "died", STATUS_END, i + 1);
+			break ;
+		}
+		else if (variable->finished_meal == variable->num_of_philos)
+		{
+			variable->philo_alive = 0;
+			print_status(philo, "End of meal", STATUS_END, i + 1);
+			break ;
+		}
+		if (i == variable->num_of_philos - 1)
+			i = -1;
+	}
+	free_all(philo, philo->mutex, philo->variable);
+}
+
+static void	sleep_until_even_eat(t_variable variable)
+{
+	struct timeval	get_time;
+	struct timeval	timestamp;
+	int				time_taken;
+
+	gettimeofday(&get_time, NULL);
+	while (1)
+	{
+		gettimeofday(&timestamp, NULL);
+		time_taken = timestamp.tv_usec - get_time.tv_usec + \
+			(timestamp.tv_sec - get_time.tv_sec) * 1000000;
+		if (time_taken > variable.time_to_eat * 1000)
+			break ;
+		usleep(variable.time_to_eat);
+	}
+}
+
+int	main(int ac, char **av)
+{
+	int				i;
+	t_philo			*philo;
+	t_variable		variable;
+	t_mutex			mutex;
+
+	i = -1;
+	if (ac != 5 && ac != 6)
 		print_error(1);
-	if (ft_check_args(argc, argv) == 0)
+	if (check_args(ac, av) == 0)
 		print_error(1);
-	philo = malloc(sizeof(t_philo) * ft_atol(argv[1]));
-	forks = malloc(sizeof(pthread_mutex_t) * ft_atol(argv[1]));
-	death = malloc(sizeof(pthread_mutex_t));
-	if (!death)
-		print_error(2);
-	ft_init_philos(philo, argc, argv);
-	ft_init_mutex(philo, argv, forks, death);
-	ft_join_threads(philo, argv);
-	ft_free(philo, forks, death);
+	init_varialbe(ac, av, &variable);
+	init_mutex(&mutex, &variable);
+	philo = init_philos(&variable, &mutex);
+	//짝
+	create_thread(philo, 1, variable.num_of_philos);
+	sleep_until_even_eat(variable);
+	create_thread(philo, 0, variable.num_of_philos);
+	check_end_conditions(philo, &variable);
 	return (0);
 }
