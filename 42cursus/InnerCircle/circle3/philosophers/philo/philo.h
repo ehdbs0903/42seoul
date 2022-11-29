@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcakay <mcakay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: doykim <doykim@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/12 01:57:46 by mcakay            #+#    #+#             */
-/*   Updated: 2022/10/12 02:47:17 by mcakay           ###   ########.fr       */
+/*   Created: 2022/11/22 01:57:46 by doykim            #+#    #+#             */
+/*   Updated: 2022/11/29 16:13:01 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,44 +14,65 @@
 # define PHILO_H
 
 # include <stdio.h>
-# include <stdlib.h>
 # include <pthread.h>
 # include <sys/time.h>
+# include <stdlib.h>
 # include <unistd.h>
 
-typedef unsigned long long	t_time;
+# define FINISHED_MEAL 2
+# define RET_DEAD 3
+# define RIGHT 0
+# define LEFT 1
+# define STATUS_EAT 0
+# define STATUS_THINK 1
+# define STATUS_SLEEP 2
+# define STATUS_FORK 3
+# define STATUS_END 4
 
-typedef struct s_philo
+typedef struct s_mutex
 {
-	int				id;
-	int				philo_nb;
+	pthread_mutex_t	mutex_print;
+	pthread_mutex_t	*mutex_forks;
+}	t_mutex;
+
+typedef struct s_variable
+{
+	struct timeval	first_meal_time;
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				must_eat;
-	int				meals_eaten;
-	int				total_eaten;
-	int				*is_dead;
-	t_time			last_meal;
-	t_time			start_time;
-	pthread_t		thread;
-	pthread_mutex_t	*death;
-	pthread_mutex_t	*left_fork_mutex;
-	pthread_mutex_t	*right_fork_mutex;
-}				t_philo;
+	int				num_of_philos;
+	int				finished_meal;
+	int				philo_alive;
+}	t_variable;
 
-t_time			ft_get_time(void);
-void			ft_sleep(int wait_time);
-int				ft_check_args(int argc, char **argv);
-void			ft_init_philos(t_philo *philo, int argc, char **argv);
-void			ft_init_forks_mutex(t_philo *philo, char **argv);
-void			ft_init_mutex(t_philo *philo, char **argv,
-					pthread_mutex_t *forks, pthread_mutex_t *death);
-long			ft_atol(const char *str);
-int				ft_print_status(t_philo *philo, char *status);
-void			ft_check_death(t_philo *philo);
-void			*ft_dinner(void *args);
-void			ft_join_threads(t_philo *philo, char **argv);
-void			ft_free(t_philo *philo, pthread_mutex_t *forks,
-					pthread_mutex_t *death);
+typedef struct s_philo
+{
+	int			fork_number[2];
+	int			last_meal_time;
+	int			philo_number;
+	int			have_meal;
+	pthread_t	philo_tid;
+	t_mutex		*mutex;
+	t_variable	*variable;
+}	t_philo;
+
+void	print_error(int n);
+
+void	free_all(t_philo *philo, t_mutex *mutex, t_variable *variable);
+
+void	create_thread(t_philo *philo, int num, int num_of_philos);
+void	init_varialbe(int ac, char **av, t_variable *variable);
+void	init_mutex(t_mutex *mutex, t_variable *variable);
+t_philo	*init_philos(t_variable *variable, t_mutex *mutex);
+
+int		ret_timestamp(t_philo *philo);
+int		print_status(t_philo *philo, char *str, int status, int philo_num);
+void	*thread_philo(void *start_routine);
+
+void	ft_usleep(t_philo *philo, int time, int timestamp);
+int		ft_isdigit(int num);
+int		ft_atoi(const char *str);
+
 #endif
