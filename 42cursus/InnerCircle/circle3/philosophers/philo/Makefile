@@ -1,27 +1,39 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: doykim   <doykim@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/11/16 16:52:41 by doykim            #+#    #+#              #
+#    Updated: 2022/12/19 20:54:07 by doykim           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = philo
 
-SRCS = main.c philo.c utils.c free.c init.c
-
 CC = cc
+CFLAGS = -Wall -Wextra -Werror #-g -fsanitize=thread
 
-CFLAGS = -Wall -Werror -Wextra -g -pthread
+SRCS = philo.c init.c act.c monitor.c utils.c free.c
+OBJS = $(SRCS:.c=.o)
 
-FLAGS_DATARACE = -fsanitize=thread -g
+all : $(NAME)
 
-all: $(NAME)
+$(NAME) : $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o $@
 
-$(NAME): $(SRCS)
-	$(CC) $(CFLAGS) $(SRCS) -o $(NAME)
+%.o : %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
-data_race:
-	$(CC) $(FLAGS_DATARACE) $(SRCS) -o $(NAME)
+clean :
+	rm -rf $(OBJS)
 
-clean:
-	rm -rf *.dSYM
-
-fclean: clean
+fclean : clean
 	rm -rf $(NAME)
 
-re: fclean all
+re :
+	make fclean
+	make all
 
-.PHONY: all clean fclean re
+.PHONY = all clean fclean re
