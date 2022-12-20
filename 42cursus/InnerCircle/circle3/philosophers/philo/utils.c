@@ -3,51 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: doykim <doykim@student.42.kr>              +#+  +:+       +#+        */
+/*   By: doykim   <doykim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/23 01:04:08 by doykim            #+#    #+#             */
-/*   Updated: 2022/11/29 16:13:16 by doykim           ###   ########.fr       */
+/*   Created: 2022/11/25 16:48:32 by doykim            #+#    #+#             */
+/*   Updated: 2022/12/19 19:53:30 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	ft_usleep(t_philo *philo, int time, int timestamp)
+void	print_status(t_philo *philo, char *str)
 {
-	int	time_taken;
-
-	time_taken = 0;
-	while (time_taken <= timestamp + time * 1000)
+	pthread_mutex_lock(&(philo->info->guard));
+	if (philo->info->all_alive == 0)
 	{
-		time_taken = ret_timestamp(philo);
-		usleep(time);
+		pthread_mutex_unlock(&(philo->info->guard));
+		return ;
 	}
+	pthread_mutex_lock(&(philo->info->print));
+	printf("%lld %d %s\n", \
+		get_time() - philo->info->start_time, philo->id, str);
+	pthread_mutex_unlock(&(philo->info->print));
+	pthread_mutex_unlock(&(philo->info->guard));
 }
 
-int	ft_isdigit(int num)
+long long	get_time(void)
 {
-	if (num >= '0' && num <= '9')
-		return (1);
-	else
-		return (0);
+	struct timeval	now;
+	long long		time;
+
+	gettimeofday(&now, NULL);
+	time = now.tv_sec * 1000 + now.tv_usec / 1000;
+	return (time);
 }
 
-int	ft_atoi(const char *str)
+int	return_error(char *str)
 {
-	unsigned int	result;
-	int				sign;
-
-	sign = 1;
-	result = 0;
-	while ((*str >= 9 && *str <= 13) || *str == ' ')
-		str++;
-	if (*str == '-' || *str == '+')
-		if (*str++ == '-')
-			sign *= -1;
-	while (*str >= '0' && *str <= '9')
-	{
-		result *= 10;
-		result += *str++ - '0';
-	}
-	return (result * sign);
+	printf("%s\n", str);
+	return (0);
 }
