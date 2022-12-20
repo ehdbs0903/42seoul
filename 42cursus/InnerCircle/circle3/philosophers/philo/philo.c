@@ -3,114 +3,83 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: doykim <doykim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: doykim   <doykim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/29 13:28:36 by doykim            #+#    #+#             */
-/*   Updated: 2022/11/29 16:13:10 by doykim           ###   ########.fr       */
+/*   Created: 2022/11/16 16:46:05 by doykim            #+#    #+#             */
+/*   Updated: 2022/12/19 20:54:46 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	ret_timestamp(t_philo *philo)
+int	main(int argc, char *argv[])
 {
-	struct timeval	get_time;
-	struct timeval	first_meal;
-	int				timestamp;
+	t_info	info;
+	t_philo	*philo;
 
-	first_meal = philo->variable->first_meal_time;
-	if (first_meal.tv_sec == 0)
+	if (!(argc == 5 || argc == 6))
+		return (return_error("argument error"));
+	if (!(init_info(&info, argc, argv)))
 		return (0);
-	gettimeofday(&get_time, NULL);
-	timestamp = (get_time.tv_sec * 1000000 + get_time.tv_usec) - \
-		(first_meal.tv_sec * 1000000 + first_meal.tv_usec);
-	return (timestamp);
+	if (!(init_philo(&philo, &info)))
+		return (0);
+	start_philo_process(&philo, &info);
+	free_all(&philo, &info);
+	return (0);
 }
 
-int	print_status(t_philo *philo, char *str, int status, int philo_number)
+void	start_philo_process(t_philo **philo, t_info *info)
 {
-	int	timestamp;
+	int	i;
 
-	pthread_mutex_lock(&philo->mutex->mutex_print);
-	if (status != STATUS_END && philo->variable->philo_alive == 0)
-		return (RET_DEAD);
-	timestamp = ret_timestamp(philo);
-	printf("%d %d %s\n", timestamp / 1000, philo_number, str);
-	pthread_mutex_unlock(&philo->mutex->mutex_print);
-	if (status == STATUS_EAT)
+	i = 0;
+	info->start_time = get_time();
+	if (info->num_of_philo == 1)
 	{
-		philo->last_meal_time = timestamp;
-		ft_usleep(philo, philo->variable->time_to_eat, timestamp);
+		pthread_create(&((*philo)[i].thread), NULL, \
+			one_routine, &((*philo)[i]));
+		pthread_join((*philo)[i].thread, NULL);
+		return ;
 	}
-	if (status == STATUS_SLEEP)
-		ft_usleep(philo, philo->variable->time_to_sleep, timestamp);
-	return (0);
-}
-
-int	sleep_until_even_eat(t_variable variable)
-{
-	struct timeval	get_time;
-	struct timeval	timestamp;
-	int				time_taken;
-
-	gettimeofday(&get_time, NULL);
-	while (1)
+	while (i < info->num_of_philo)
 	{
-		gettimeofday(&timestamp, NULL);
-		time_taken = timestamp.tv_usec - get_time.tv_usec + \
-			(timestamp.tv_sec - get_time.tv_sec) * 1000000;
-		if (time_taken > variable.time_to_eat * 900)
-			break ;
-		usleep(variable.time_to_eat);
+		pthread_create(&((*philo)[i].thread), NULL, routine, &((*philo)[i]));
+		i++;
 	}
-	return (0);
+	monitoring(philo, info);
 }
 
-static int	philo_eat(t_philo *philo)
-{
-	if (pthread_mutex_lock(\
-		&philo->mutex->mutex_forks[philo->fork_number[LEFT]]) != 0)
-		return (-1);
-	if (print_status(philo, "has taken a fork", STATUS_FORK, \
-		philo->philo_number + 1) == RET_DEAD)
-		return (RET_DEAD);
-	if (pthread_mutex_lock(\
-		&philo->mutex->mutex_forks[philo->fork_number[RIGHT]]) != 0)
-		return (-1);
-	if (print_status(philo, "has taken a fork", STATUS_FORK, \
-		philo->philo_number + 1) == RET_DEAD)
-		return (RET_DEAD);
-	if (print_status(philo, "is eating", STATUS_EAT, \
-		philo->philo_number + 1) == RET_DEAD)
-		return (RET_DEAD);
-	pthread_mutex_unlock(&philo->mutex->mutex_forks[philo->fork_number[RIGHT]]);
-	pthread_mutex_unlock(&philo->mutex->mutex_forks[philo->fork_number[LEFT]]);
-	philo->have_meal++;
-	if (philo->have_meal == philo->variable->must_eat)
-		philo->variable->finished_meal++;
-	return (0);
-}
-
-void	*thread_philo(void *start_routine)
+void	*one_routine(void *arg)
 {
 	t_philo	*philo;
 
-	philo = (t_philo *)start_routine;
-	if (philo->variable->first_meal_time.tv_sec == 0)
-		gettimeofday(&philo->variable->first_meal_time, NULL);
-	while (philo->variable->philo_alive == 1)
+	philo = (t_philo *)arg;
+	printf("%d %d has taken a fork\n", 0, 1);
+	usleep(philo->info->time_to_die * 1000);
+	printf("%lld %d is died\n", \
+		get_time() - philo->info->start_time, 1);
+	return (NULL);
+}
+
+void	*routine(void *arg)
+{
+	t_philo	*philo;
+
+	philo = (t_philo *)arg;
+	if (philo->id % 2 == 0)
+		usleep(philo->info->time_to_eat);
+	while (check_all_alive(philo->info))
 	{
-		if (philo_eat(philo) != 0)
-			break ;
-		if (print_status(philo, "is sleeping", STATUS_SLEEP, \
-			philo->philo_number + 1) != 0)
-			break ;
-		if (print_status(philo, "is thinking", STATUS_THINK, \
-			philo->philo_number + 1) != 0)
-			break ;
+		philo_eat(philo);
+		(philo->eat_count)++;
+		if (philo->eat_count == philo->info->must_eat_count)
+		{
+			pthread_mutex_lock(&(philo->guard));
+			philo->finish = 1;
+			pthread_mutex_unlock(&(philo->guard));
+		}
+		philo_sleep(philo);
+		philo_think(philo);
 	}
-	pthread_mutex_unlock(&philo->mutex->mutex_print);
-	pthread_mutex_unlock(&philo->mutex->mutex_forks[philo->fork_number[RIGHT]]);
-	pthread_mutex_unlock(&philo->mutex->mutex_forks[philo->fork_number[LEFT]]);
-	return (0);
+	return (NULL);
 }
