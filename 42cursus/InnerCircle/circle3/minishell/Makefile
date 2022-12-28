@@ -9,12 +9,12 @@ READ_LIB =  -lreadline
 RM = rm -rf
 
 LIB_PATH = ./libs/libft
-SRCS_PATH = ./srcs/lexer
+SRCS_PATH = ./srcs
 OBJS_PATH = ./objects
 INCLUDES = ./includes
 
 
-SRCS = lexer.c
+SRCS = main.c lexer.c parser.c utils.c
 OBJS_NAME = $(SRCS:.c=.o)
 OBJS = $(addprefix $(OBJS_PATH)/, $(OBJS_NAME))
 
