@@ -3,41 +3,113 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: doykim <doykim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jungeun <jungeun@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/22 18:51:22 by doykim            #+#    #+#             */
-/*   Updated: 2022/12/23 03:22:04 by doykim           ###   ########.fr       */
+/*   Created: 2023/01/09 13:28:40 by hajeong           #+#    #+#             */
+/*   Updated: 2023/01/14 19:59:48 by jungeun          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int main() {
-	t_list *lexer_token = NULL;
-	lexer("  echo cat <<eof >file1 && cat file1 && abc || wc <file1 | cat >file2 \"$asd 43 rew", &lexer_token);
-	t_list *temp = lexer_token;
-	int node_index = 0;
+int	main(int argc, char *argv[], char *envp[])
+{
+	char			*cmd;
+	int				len;
+	t_exec_token	*token;
+
+	(void)argv;
+	if (argc != 1)
+		return (error_return("argument error\n"));
+	g_info.env_list = init_env_list(envp);
+	g_info.exit_status = 0;
+	while (1)
+	{
+		g_info.heredoc_cnt = 0;
+		cmd = read_cmd();
+		if (ft_strlen(cmd) >= 1)
+			add_history(cmd);
+		if (make_token(&token, cmd, &len) != 0)
+			continue ;
+		if (token->parser_token->cmd == NULL && \
+			token->parser_token->in == NULL && \
+			token->parser_token->out == NULL)
+			continue ;
+		exec_cmd(token, g_info.env_list, len);
+		free_all_token(token, token->parser_token, len);
+		free(cmd);
+	}
+}
+
+static int	get_heredoc_num(int num, t_parser_token *parser_token)
+{
+	t_list	*in;
+
+	in = parser_token->in;
+	while (in != NULL)
+	{
+		if (ft_strncmp(in->content, "<<", 3) == 0)
+			num++;
+		in = in->next->next;
+	}
+	return (num);
+}
+
+t_exec_token	*make_exec_token(t_parser_token *parser_token, \
+				t_exec_token **exec_token, int len)
+{
+	int	i;
+	int	num;
+
+	*exec_token = (t_exec_token *)malloc(sizeof(t_exec_token) * len);
+	if (*exec_token == NULL)
+		return (NULL);
+	i = 0;
+	num = 0;
+	while (i < len)
+	{
+		(*exec_token)[i].parser_token = &(parser_token[i]);
+		(*exec_token)[i].cmd = make_2d_array(parser_token[i].cmd);
+		(*exec_token)[i].heredoc_num = num;
+		num = get_heredoc_num(num, &parser_token[i]);
+		i++;
+	}
+	return (*exec_token);
+}
+
+char	**make_2d_array(t_list *cmd_list)
+{
+	int		i;
+	char	**cmd;
+	t_list	*temp;
+
+	cmd = (char **)malloc(sizeof(char *) * (ft_lstsize(cmd_list) + 1));
+	if (!cmd)
+		return (NULL);
+	i = 0;
+	temp = cmd_list;
 	while (temp != NULL)
 	{
-		printf("%2d 번째 노드 : [%s]\n", node_index++, temp->content);
+		cmd[i] = temp->content;
+		i++;
 		temp = temp->next;
 	}
-	printf("%d %d\n", node_index, ft_lstsize(lexer_token));
+	cmd[i] = NULL;
+	return (cmd);
+}
 
-	//ft_lstadd_back(&temp, ft_lstnew("123"));
-	//printf("%s", temp->content);
-	
-	t_parser_tokens parser_tokens;
-	parser(lexer_token, &parser_tokens);
-	//parser_tokens.cmd = NULL;
-	//ft_lstadd_back(&parser_tokens.cmd, ft_lstnew("123"));
-	//printf("%s\n", parser_tokens.cmd->content);
-	t_list *temp2 = parser_tokens.type;
-	int i = 0;
-	while (temp2 != NULL)
+void	free_all_token(t_exec_token *exec_token, t_parser_token \
+		*parser_token, int len)
+{
+	int	i;
+
+	i = 0;
+	while (i < len)
 	{
-		printf("%d : %s\n", i++, temp2->content);
-		temp2 = temp2->next;
+		if (exec_token[i].cmd != NULL)
+			free(exec_token[i].cmd);
+		i++;
 	}
-	return (0);
+	free_parser_token(parser_token, len);
+	free(exec_token);
 }
