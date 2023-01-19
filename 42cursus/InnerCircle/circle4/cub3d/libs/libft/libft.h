@@ -6,7 +6,7 @@
 /*   By: hajeong <hajeong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 15:40:00 by jungchoi          #+#    #+#             */
-/*   Updated: 2022/12/25 18:04:28 by hajeong          ###   ########.fr       */
+/*   Updated: 2023/01/18 16:03:51 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,10 @@ int				ft_isdigit(int c);
 int				ft_isalnum(int c);
 int				ft_isascii(int c);
 int				ft_isprint(int c);
+int				ft_isspace(int c);
 
 size_t			ft_strlen(const char *str);
+int				ft_strlen_2d(char **str);
 void			*ft_memset(void *b, int c, size_t len);
 void			ft_bzero(void *s, size_t n);
 void			*ft_memcpy(void *dest, const void *src, size_t n);

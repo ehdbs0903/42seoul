@@ -6,94 +6,87 @@
 /*   By: jungchoi <jungchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 19:05:36 by jungchoi          #+#    #+#             */
-/*   Updated: 2022/03/24 13:05:28 by jungchoi         ###   ########.fr       */
+/*   Updated: 2023/01/19 21:13:06 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	*ft_strndup(char const *s, int n)
+static char	*ft_strndup(const char *s, size_t n)
 {
-	int		i;
-	char	*dest;
-
-	dest = (char *)malloc(sizeof(char) * (n + 1));
-	if (!dest)
-		return (0);
-	i = 0;
-	while (i < n && s[i])
-	{
-		dest[i] = s[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
-}
-
-static int	ft_free(char **ret, int j)
-{
-	while (--j >= 0)
-	{
-		free(ret[j]);
-		ret[j] = 0;
-	}
-	free(ret);
-	ret = 0;
-	return (0);
-}
-
-static int	ft_putarr(char **ret, char const *s, char c, int j)
-{
-	int	i;
-	int	start;
-	int	len;
+	size_t	i;
+	char	*str;
 
 	i = 0;
-	while (s[i] == c)
-		i++;
-	start = i;
-	while (s[i])
+	str = NULL;
+	if (n == 0)
+		return (NULL);
+	str = (char *)malloc(sizeof(char) * (n + 1));
+	if (str == 0)
+		return (NULL);
+	while (i < n)
 	{
-		if (s[i] != c && (s[i + 1] == c || s[i + 1] == '\0'))
-		{
-			len = i - start + 1;
-			ret[j++] = ft_strndup(&s[start], len);
-			if (ret[j - 1] == 0)
-				return (ft_free(ret, j - 1));
-		}
-		else if (s[i] == c && s[i + 1] != c)
-			start = i + 1;
+		str[i] = s[i];
 		i++;
 	}
-	ret[j] = 0;
-	return (1);
+	str[i] = '\0';
+	return (str);
+}
+
+static char	**ft_freeall(char **list)
+{
+	size_t	j;
+
+	j = 0;
+	while (list[j])
+	{
+		free(list[j]);
+		j++;
+	}
+	free(list);
+	return (NULL);
+}
+
+size_t	ft_wordcount(char const *s, char c)
+{
+	size_t	listsize;
+	size_t	i;
+
+	i = 0;
+	listsize = 0;
+	while (s[i] != '\0')
+	{
+		if ((i == 0 && s[i] != c) || \
+		(s[i] == c && s[i + 1] != '\0' && s[i + 1] != c))
+			listsize++;
+		i++;
+	}
+	return (listsize);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	int		i;
-	int		word;
-	char	**ret;
+	char	**strlist;
+	size_t	i;
+	size_t	k;
+	size_t	save;
 
 	i = 0;
-	word = 0;
-	if (!s)
-		return (0);
-	while (s[i])
+	k = 0;
+	strlist = (char **)malloc(sizeof(char *) * (ft_wordcount(s, c) + 1));
+	if (!strlist)
+		return (NULL);
+	while (i < ft_wordcount(s, c) && s[k] != '\0')
 	{
-		if (s[i] != c && (s[i + 1] == c || s[i + 1] == '\0'))
-			word++;
-		i++;
+		while (s[k] == c)
+			k++;
+		save = k;
+		while (s[k] != c && s[k] != '\0')
+			k++;
+		strlist[i] = ft_strndup(&s[save], k - save);
+		if (strlist[i++] == 0)
+			return (ft_freeall(strlist));
 	}
-	ret = (char **)malloc(sizeof(char *) * (word + 1));
-	if (!ret)
-		return (0);
-	if (s[0])
-	{
-		if (ft_putarr(ret, s, c, 0) == 0)
-			return (0);
-	}
-	else
-		ret[0] = 0;
-	return (ret);
+	strlist[i] = NULL;
+	return (strlist);
 }
