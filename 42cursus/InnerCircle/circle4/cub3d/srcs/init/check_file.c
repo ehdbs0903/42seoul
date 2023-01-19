@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_map.c                                        :+:      :+:    :+:   */
+/*   check_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: doykim <doykim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 16:19:27 by doykim            #+#    #+#             */
-/*   Updated: 2023/01/17 21:32:02 by doykim           ###   ########.fr       */
+/*   Updated: 2023/01/19 19:18:03 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	check_file(int ac, char **av)
+void	check_file(int ac, char **av, t_game *game)
 {
 	char	buff[1024];
 	int		fd;
@@ -22,8 +22,7 @@ void	check_file(int ac, char **av)
 	if (fd == -1)
 		error_exit(1);
 	read(fd, buff, 1024);
-	printf("%s", buff);
-	check_element(buff);
+	init_element(buff, game);
 	close(fd);
 }
 
@@ -42,16 +41,4 @@ void	check_argument(int ac, char **av)
 		error_exit(1);
 	if (!ft_strnstr(av[1] + i, ".cub\0", 5))
 		error_exit(1);
-}
-
-void	check_element(char *buff)
-{
-	char	**temp;
-	int		i;
-
-	temp = ft_split(buff, '\n');
-	i = 0;
-	while (temp[i])
-		printf("%s\n", temp[i++]);
-	printf("%d\n", i);
 }
