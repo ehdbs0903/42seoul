@@ -6,7 +6,7 @@
 /*   By: doykim <doykim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 16:39:01 by doykim            #+#    #+#             */
-/*   Updated: 2023/01/19 20:10:57 by doykim           ###   ########.fr       */
+/*   Updated: 2023/01/25 21:06:12 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,59 +77,4 @@ int	check_texture(char *line, char **tmp)
 	close(fd);
 	*tmp = ft_strdup(line);
 	return (1);
-}
-
-void	init_rgb(t_game *game, char *line)
-{
-	char	**temp;
-	char	c;
-
-	c = line[0];
-	line += 2;
-	while (ft_isspace(*line))
-		line++;
-	temp = ft_split(line, ',');
-	check_rgb_num(temp);
-	if (c == 'F')
-	{
-		game->floor.r = ft_atoi(temp[0]);
-		game->floor.g = ft_atoi(temp[1]);
-		game->floor.b = ft_atoi(temp[2]);
-	}
-	else if (c == 'C')
-	{
-		game->ceil.r = ft_atoi(temp[0]);
-		game->ceil.g = ft_atoi(temp[0]);
-		game->ceil.b = ft_atoi(temp[0]);
-	}
-	free_2d_array(temp);
-}
-
-void	check_rgb_num(char **temp)
-{
-	int	i;
-	int	j;
-	int	len;
-	int	num;
-
-	if (ft_strlen_2d(temp) != 3)
-		error_exit(2);
-	i = -1;
-	while (++i < 3)
-	{
-		len = ft_strlen(temp[i]);
-		j = 0;
-		while (j < len)
-		{
-			if (!ft_isdigit(temp[i][j++]))
-				error_exit(2);
-		}
-	}
-	i = 0;
-	while (i < 3)
-	{
-		num = ft_atoi(temp[i++]);
-		if (num < 0 || num > 255)
-			error_exit(2);
-	}
 }
