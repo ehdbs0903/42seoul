@@ -6,7 +6,7 @@
 /*   By: doykim <doykim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 15:40:49 by doykim            #+#    #+#             */
-/*   Updated: 2023/01/19 21:13:52 by doykim           ###   ########.fr       */
+/*   Updated: 2023/01/25 21:06:19 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,26 +34,23 @@ int	main(int ac, char *av[])
 	printf("we_path : %s\n", game.we_path);
 	printf("ea_path : %s\n", game.so_path);
 	
-	printf("\nfrgb : %d %d %d", game.floor.r, game.floor.g, game.floor.b);
-	printf("\ncrgb : %d %d %d\n", game.ceil.r, game.ceil.g, game.ceil.b);
-
 	printf("\nplayer pos : %d, %d\n", game.player.x, game.player.y);
 	printf("player dir : %c\n", game.player.dir);
 
 	printf("\n\n-------------------------------\n\n\n");
-// 주석 풀면 map뒤에 쓰레기값 들어가면서 map error남
-//	mlx_hook(game.win, 17, 0, x_exit, &game);
-//	mlx_hook(game.win, 2, 0, key_press, &game);
-//	mlx_loop(game.mlx);
+
+	mlx_hook(game.win, 17, 0, x_exit, &game);
+	mlx_hook(game.win, 2, 0, key_press, &game);
+//	mlx_hook(game.win, 3, 0, key_release, &game);
+	mlx_loop_hook(game.mlx, &main_loop, &game);
+	mlx_loop(game.mlx);
 	
 	free_2d_array(game.map);
 	free(game.no_path);
 	free(game.so_path);
 	free(game.we_path);
 	free(game.ea_path);
-	free(game.win);
-	free(game.mlx);
-//	mlx_destroy_window(game.mlx, game.win);
+	mlx_destroy_window(game.mlx, game.win);
 
 	return (0);
 }
