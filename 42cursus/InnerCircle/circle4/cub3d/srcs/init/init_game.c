@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: doykim <doykim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sanghan <sanghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 19:48:22 by doykim            #+#    #+#             */
-/*   Updated: 2023/01/25 21:06:11 by doykim           ###   ########.fr       */
+/*   Updated: 2023/02/02 20:17:14 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,15 @@ void	init_game(int ac, char *av[], t_game *game)
 	game->ea_path = NULL;
 	game->floor = NULL;
 	game->ceil = NULL;
+	game->movespeed = 0.01;
+	game->rotspeed = 0.01;
+	game->plane_x = 0;
+	game->plane_y = 0;
 	game->player.x = 0;
 	game->player.y = 0;
-	game->player.dir = 0;
+	game->player.dir_x = 0;
+	game->player.dir_y = 0;
 	game->mlx = mlx_init();
 	check_file(ac, av, game);
-	game->win = mlx_new_window(game->mlx, 1920, 1080, "cub3d");
+	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, "cub3d");
 }
