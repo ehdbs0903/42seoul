@@ -6,49 +6,48 @@
 /*   By: sanghan <sanghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 18:55:45 by doykim            #+#    #+#             */
-/*   Updated: 2023/01/24 17:18:03 by doykim           ###   ########.fr       */
+/*   Updated: 2023/02/02 20:17:19 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	key_press(int keycode, t_game *game)
+int key_press(int key, t_game *game)
 {
-	if (keycode == KEY_W)
-	{
-		move(game, 0, 1);
-	}
-	else if (keycode == KEY_S)
-	{
-		move(game, 0, -1);
-	}
-	else if (keycode == KEY_A)
-	{
-		move(game, 1, 0);
-	}
-	else if (keycode == KEY_D)
-	{
-		move(game, -1, 0);
-	}
-	else if (keycode == KEY_ESC)
-		exit(2);
-	return (0);
-}
+    if (key == KEY_W)
+    {
+        if (game->map[(int)(game->player.x + game->player.dir_x * game->movespeed)][(int)(game->player.y)] == '0')
+            game->player.x += game->player.dir_x * game->movespeed;
+        if (game->map[(int)(game->player.x)][(int)(game->player.y + game->player.dir_y * game->movespeed)] == '0')
+            game->player.y += game->player.dir_y * game->movespeed;
+    }
 
-void	move(t_game *game, int dx, int dy)
-{
-	if (game->map[game->player.y + dy][game->player.x + dx] != '1')
-	{
-//		game->map[game->player.y + dy][game->player.x + dx] = '0';
-		game->player.x += dx;
-		game->player.y += dy;
-	}
-	printf("x y : %d %d\n", game->player.x, game->player.y);
-}
-
-int	x_exit(int n)
-{
-	n = 0;
-	exit(n);
-	return (0);
+    if (key == KEY_S)
+    {
+        if (game->map[(int)(game->player.x + game->player.dir_x * game->movespeed)][(int)(game->player.y)] == '0')
+            game->player.x -= game->player.dir_x * game->movespeed;
+        if (game->map[(int)(game->player.x)][(int)(game->player.y + game->player.dir_y * game->movespeed)] == '0')
+            game->player.y -= game->player.dir_y * game->movespeed;
+    }
+    if (key == KEY_A)
+    {
+        double oldDirectionX = game->player.dir_x;
+        game->player.dir_x = game->player.dir_x * cos(-game->rotspeed) - game->player.dir_y * sin(-game->rotspeed);
+        game->player.dir_y = oldDirectionX * sin(-game->rotspeed) + game->player.dir_y * cos(-game->rotspeed);
+        double oldPlaneX = game->plane_x;
+        game->plane_x = game->plane_x * cos(-game->rotspeed) - game->plane_y * sin(-game->rotspeed);
+        game->plane_y = oldPlaneX * sin(-game->rotspeed) + game->plane_y * cos(-game->rotspeed);
+    }
+    if (key == KEY_D)
+    {
+        double oldDirectionX = game->player.dir_x;
+        game->player.dir_x = game->player.dir_x * cos(game->rotspeed) - game->player.dir_y * sin(game->rotspeed);
+        game->player.dir_y = oldDirectionX * sin(game->rotspeed) + game->player.dir_y * cos(game->rotspeed);
+        double oldPlaneX = game->plane_x;
+        game->plane_x = game->plane_x * cos(game->rotspeed) - game->plane_y * sin(game->rotspeed);
+        game->plane_y = oldPlaneX * sin(game->rotspeed) + game->plane_y * cos(game->rotspeed);
+    }
+    if (key == KEY_ESC)
+        exit(0);
+    return (0);
 }
