@@ -6,7 +6,7 @@
 /*   By: sanghan <sanghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 15:32:29 by doykim            #+#    #+#             */
-/*   Updated: 2023/01/25 21:06:20 by doykim           ###   ########.fr       */
+/*   Updated: 2023/02/02 20:17:10 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@
 # define KEY_LEFT	123
 # define KEY_RIGHT	124
 
+# define WIDTH		1920
+# define HEIGHT		1080
+
 typedef struct	s_img
 {
 	void	*img;
@@ -39,11 +42,10 @@ typedef struct	s_img
 
 typedef struct s_player
 {
-	int		x;
-	int		y;
-	int		dir_x;
-	int		dir_y;
-	char	dir;
+	double	x;
+	double	y;
+	double	dir_x;
+	double	dir_y;
 }	t_player;
 
 typedef struct s_rgb
@@ -58,6 +60,8 @@ typedef struct s_game
 	void		*mlx;
 	void		*win;
 	int			p_flag;
+	double		plane_x;
+	double		plane_y;
 	char		**map;
 	char		*no_path;
 	char		*so_path;
@@ -65,7 +69,14 @@ typedef struct s_game
 	char		*ea_path;
 	void		*floor;
 	void		*ceil;
+	float		movespeed;
+	float		rotspeed;
 	t_player	player;
+	t_img	img;
+	t_img	img_no;
+	t_img	img_so;
+	t_img	img_we;
+	t_img	img_ea;
 }	t_game;
 
 //init
@@ -85,13 +96,14 @@ void	*make_rgb_img(t_game *game, int rgb);
 void	read_map(char **temp, t_game *game);
 void	check_map(char **temp, t_game *game);
 void	init_player(char c, int x, int y, t_game *game);
+void	init_dir(char dir, t_game *game);
 
 //loop
 int		main_loop(t_game *game);
 
 //key
-int		key_press(int keycode, t_game *game);
-void	move(t_game *game, int dx, int dy);
+int		key_press(int key, t_game *game);
+//void	move(t_game *game, int dx, int dy);
 int		x_exit(int n);
 
 //utils
@@ -99,4 +111,5 @@ void	error_exit(int n);
 void	free_2d_array(char **str);
 void	print_2d(char **arr);
 
+int		raycasting(t_game *game);
 #endif
