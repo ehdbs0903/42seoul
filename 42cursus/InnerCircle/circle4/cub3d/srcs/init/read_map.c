@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: doykim <doykim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sanghan <sanghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 12:52:43 by doykim            #+#    #+#             */
-/*   Updated: 2023/01/19 21:13:50 by doykim           ###   ########.fr       */
+/*   Updated: 2023/01/26 16:41:32 by sanghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	check_map(char **temp, t_game *game)
 					error_exit(3);
 			}
 			else if (temp[i][j] != ' ' && temp[i][j] != '1')
-				init_player(temp[i][j], j, i, game);
+				init_player(temp[i][j], i, j, game);
 		}
 	}
 }
@@ -68,11 +68,35 @@ void	init_player(char c, int x, int y, t_game *game)
 		game->p_flag = 1;
 		if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
 		{
-			game->player.dir = c;
 			game->player.x = x;
 			game->player.y = y;
+			init_dir(c, game);
 		}
 		else
 			error_exit(3);
 	}
 }
+
+ void	init_dir(char dir, t_game *game)
+ {
+ 	if (dir == 'N')
+ 	{
+ 		game->player.dir_y = -1;
+ 		game->plane_x = 0.66;
+ 	}
+ 	else if (dir == 'S')
+ 	{
+ 		game->player.dir_y = 1;
+ 		game->plane_x = -0.66;
+ 	}
+ 	else if (dir == 'W')
+ 	{
+ 		game->player.dir_x = -1;
+ 		game->plane_y = 0.66;
+ 	}
+ 	else if (dir == 'E')
+ 	{
+ 		game->player.dir_x = 1;
+ 		game->plane_y = -0.66;
+ 	}
+ }
