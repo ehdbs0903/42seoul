@@ -14,15 +14,18 @@
 
 void	check_file(int ac, char **av, t_game *game)
 {
-	char	buff[1024];
+	char	buff[MAX_SIZE];
+	char	**temp;
 	int		fd;
 
 	check_argument(ac, av);
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
 		error_exit(1);
-	read(fd, buff, 1024);
-	init_element(buff, game);
+	read(fd, buff, MAX_SIZE);
+	temp = ft_split(buff, '\n');
+	init_element(temp, game);
+	free_2d_array(temp);
 	close(fd);
 }
 
@@ -35,9 +38,7 @@ void	check_argument(int ac, char **av)
 		error_exit(1);
 	len = ft_strlen(av[1]);
 	i = len - 4;
-	if (i <= 5)
-		error_exit(1);
-	if (!ft_strnstr(av[1], "maps/", 5))
+	if (i <= 0)
 		error_exit(1);
 	if (!ft_strnstr(av[1] + i, ".cub\0", 5))
 		error_exit(1);

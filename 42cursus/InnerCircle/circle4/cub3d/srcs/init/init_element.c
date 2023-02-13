@@ -6,24 +6,55 @@
 /*   By: doykim <doykim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 16:39:01 by doykim            #+#    #+#             */
-/*   Updated: 2023/01/25 21:06:12 by doykim           ###   ########.fr       */
+/*   Updated: 2023/02/08 20:31:46 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_element(char *buff, t_game *game)
+static void	xpm_file_to_image_texture(t_game *game)
 {
-	char	**temp;
-	int		len;
-	int		i;
+	int	w;
+	int	h;
 
-	temp = ft_split(buff, '\n');
+	game->img_no.img = mlx_xpm_file_to_image(game->mlx, \
+		game->no_path, &w, &h);
+	game->img_so.img = mlx_xpm_file_to_image(game->mlx, \
+		game->so_path, &w, &h);
+	game->img_we.img = mlx_xpm_file_to_image(game->mlx, \
+		game->we_path, &w, &h);
+	game->img_ea.img = mlx_xpm_file_to_image(game->mlx, \
+		game->ea_path, &w, &h);
+	if (game->img_no.img == NULL || game->img_so.img == NULL \
+		|| game->img_ea.img == NULL || game->img_we.img == NULL)
+		error_exit(2);
+}
+
+static void	get_data_addr_texture(t_game *game)
+{
+	game->img_no.data = (int *)mlx_get_data_addr(game->img_no.img, \
+		&(game->img_no.bpp), \
+		&(game->img_no.line_len), &(game->img_no.endian));
+	game->img_so.data = (int *)mlx_get_data_addr(game->img_so.img, \
+		&(game->img_so.bpp), \
+		&(game->img_so.line_len), &(game->img_so.endian));
+	game->img_we.data = (int *)mlx_get_data_addr(game->img_we.img, \
+		&(game->img_we.bpp), \
+		&(game->img_we.line_len), &(game->img_we.endian));
+	game->img_ea.data = (int *)mlx_get_data_addr(game->img_ea.img, \
+		&(game->img_ea.bpp), \
+		&(game->img_ea.line_len), &(game->img_ea.endian));
+}
+
+void	init_element(char **temp, t_game *game)
+{
+	static int	i = -1;
+	int			len;
+
 	len = ft_strlen_2d(temp);
 	if (len <= 6)
 		error_exit(2);
-	i = 0;
-	while (i < 6)
+	while (++i < 6)
 	{
 		if (!ft_strncmp("NO ", temp[i], 3) || !ft_strncmp("SO ", temp[i], 3)
 			|| !ft_strncmp("WE ", temp[i], 3) || !ft_strncmp("EA ", temp[i], 3))
@@ -32,10 +63,15 @@ void	init_element(char *buff, t_game *game)
 			init_rgb(game, temp[i]);
 		else
 			error_exit(2);
-		i++;
 	}
+	if (game->no_path == NULL || game->so_path == NULL \
+		|| game->we_path == NULL || game->ea_path == NULL)
+		error_exit(2);
+	if (game->ceil < 0 || game->floor < 0)
+		error_exit(2);
 	read_map(temp, game);
-	free_2d_array(temp);
+	xpm_file_to_image_texture(game);
+	get_data_addr_texture(game);
 }
 
 void	init_texture(t_game *game, char *line)

@@ -6,7 +6,7 @@
 /*   By: doykim <doykim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 19:34:16 by doykim            #+#    #+#             */
-/*   Updated: 2023/01/25 21:06:09 by doykim           ###   ########.fr       */
+/*   Updated: 2023/02/08 20:40:17 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ void	init_rgb(t_game *game, char *line)
 	check_rgb_num(temp);
 	if (c == 'F')
 	{
-		game->floor = make_rgb_img(game, ft_atoi(temp[0]) << 16 \
+		game->floor = (ft_atoi(temp[0]) << 16 \
 				| ft_atoi(temp[1]) << 8 | ft_atoi(temp[2]));
 	}
 	else if (c == 'C')
 	{
-		game->ceil = make_rgb_img(game, ft_atoi(temp[0]) << 16 \
-					 | ft_atoi(temp[1]) << 8 | ft_atoi(temp[2]));
+		game->ceil = (ft_atoi(temp[0]) << 16 \
+				| ft_atoi(temp[1]) << 8 | ft_atoi(temp[2]));
 	}
 	free_2d_array(temp);
 }
@@ -72,6 +72,8 @@ void	*make_rgb_img(t_game *game, int rgb)
 	int		j;
 
 	image.img = mlx_new_image(game->mlx, 1920, 540);
+	if (image.img == NULL)
+		exit(1);
 	image.data = (int *)mlx_get_data_addr(image.img, &image.bpp, \
 			&image.line_len, &image.endian);
 	i = 0;

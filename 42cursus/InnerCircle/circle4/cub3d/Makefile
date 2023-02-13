@@ -6,11 +6,11 @@
 #    By: sanghan <sanghan@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 14:51:48 by sanghan           #+#    #+#              #
-#    Updated: 2023/02/02 20:17:07 by doykim           ###   ########.fr        #
+#    Updated: 2023/02/09 13:01:57 by sanghan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = cub3d
+NAME = cub3D
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
@@ -24,14 +24,12 @@ MLX_DIR	= mlx
 UTILS_DIR = utils
 INIT_DIR = init
 KEY_DIR = key
-LOOP_DIR = loop
 RAY_DIR = raycast
 
 INIT_SRCS = init_game.c check_file.c init_element.c init_rgb.c read_map.c
-UTILS_SRCS = error_exit.c free.c print.c
+UTILS_SRCS = error_exit.c free.c
 KEY_SRCS = key_press.c
-LOOP_SRCS = main_loop.c
-RAY_SRCS = raycast.c
+RAY_SRCS = raycast.c raycast_image.c
 
 LIBFT = libft.a
 LIBFT_LIB = -lft
@@ -40,7 +38,6 @@ SRCS = $(addprefix $(SRCS_DIR)/, main.c) \
 	$(addprefix $(SRCS_DIR)/$(UTILS_DIR)/, $(UTILS_SRCS)) \
 	$(addprefix $(SRCS_DIR)/$(INIT_DIR)/, $(INIT_SRCS)) \
 	$(addprefix $(SRCS_DIR)/$(KEY_DIR)/, $(KEY_SRCS)) \
-	$(addprefix $(SRCS_DIR)/$(LOOP_DIR)/, $(LOOP_SRCS)) \
 	$(addprefix $(SRCS_DIR)/$(RAY_DIR)/, $(RAY_SRCS))
 
 OBJS = $(SRCS:.c=.o)

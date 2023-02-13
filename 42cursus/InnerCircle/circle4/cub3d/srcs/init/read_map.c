@@ -6,7 +6,7 @@
 /*   By: sanghan <sanghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 12:52:43 by doykim            #+#    #+#             */
-/*   Updated: 2023/01/26 16:41:32 by sanghan          ###   ########.fr       */
+/*   Updated: 2023/02/09 13:18:18 by sanghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	check_map(char **temp, t_game *game)
 					error_exit(3);
 			}
 			else if (temp[i][j] != ' ' && temp[i][j] != '1')
-				init_player(temp[i][j], i, j, game);
+				init_player(temp[i][j], j, i, game);
 		}
 	}
 }
@@ -68,8 +68,8 @@ void	init_player(char c, int x, int y, t_game *game)
 		game->p_flag = 1;
 		if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
 		{
-			game->player.x = x;
-			game->player.y = y;
+			game->player.x = x + 0.5;
+			game->player.y = y + 0.5;
 			init_dir(c, game);
 		}
 		else
@@ -77,26 +77,26 @@ void	init_player(char c, int x, int y, t_game *game)
 	}
 }
 
- void	init_dir(char dir, t_game *game)
- {
- 	if (dir == 'N')
- 	{
- 		game->player.dir_y = -1;
- 		game->plane_x = 0.66;
- 	}
- 	else if (dir == 'S')
- 	{
- 		game->player.dir_y = 1;
- 		game->plane_x = -0.66;
- 	}
- 	else if (dir == 'W')
- 	{
- 		game->player.dir_x = -1;
- 		game->plane_y = 0.66;
- 	}
- 	else if (dir == 'E')
- 	{
- 		game->player.dir_x = 1;
- 		game->plane_y = -0.66;
- 	}
- }
+void	init_dir(char dir, t_game *game)
+{
+	if (dir == 'N')
+	{
+		game->player.dir_y = -1;
+		game->plane_x = 0.66;
+	}
+	else if (dir == 'S')
+	{
+		game->player.dir_y = 1;
+		game->plane_x = -0.66;
+	}
+	else if (dir == 'W')
+	{
+		game->player.dir_x = -1;
+		game->plane_y = -0.66;
+	}
+	else if (dir == 'E')
+	{
+		game->player.dir_x = 1;
+		game->plane_y = 0.66;
+	}
+}
