@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   contact.hpp                                        :+:      :+:    :+:   */
+/*   Contact.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: doykim <doykim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 19:07:11 by doykim            #+#    #+#             */
-/*   Updated: 2023/02/15 19:32:48 by doykim           ###   ########.fr       */
+/*   Updated: 2023/02/19 19:35:03 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,20 @@ private:
 	std::string phone_number;
 	std::string darkest_secret;
 public:
-	int	getIndex();
-	std::string getFirstName();
-	std::string getLastName();
-	std::string getNickname();
-	std::string getPhoneNumber();
-	std::string darkset_secret();
+	Contact(void);
+	~Contact(void);
 
-	void setIndex();
-	std::string getFirstName();
-	std::string getLastName();
-	std::string getNickname();
-	std::string getPhoneNumber();
-	std::string darkset_secret();
-}
+	int	getIndex(void) const;
+	std::string getFirstName(void) const;
+	std::string getLastName(void) const;
+	std::string getNickname(void) const;
+	std::string getPhoneNumber(void) const;
+	std::string getDarksetSecret(void) const;
+
+	void setIndex(int i);
+	void setFirstName(std::string str);
+	void setLastName(std::string str);
+	void setNickname(std::string str);
+	void setPhoneNumber(std::string str);
+	void setDarksetSecret(std::string str);
+};

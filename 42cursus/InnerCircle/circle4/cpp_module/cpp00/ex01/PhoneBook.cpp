@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PhoneBook.hpp                                      :+:      :+:    :+:   */
+/*   PhoneBook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: doykim <doykim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: doykim <daykim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/15 17:56:00 by doykim            #+#    #+#             */
-/*   Updated: 2023/02/19 19:35:06 by doykim           ###   ########.fr       */
+/*   Created: 2023/02/17 16:09:20 by doykim            #+#    #+#             */
+/*   Updated: 2023/02/19 19:35:09 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Contact.hpp"
+#include "PhoneBook.hpp"
 
-class PhoneBook
+PhoneBook::PhoneBook(void) {}
+PhoneBook::~PhoneBook(void) {}
+
+void PhoneBook::add(void)
 {
-private:
-	Contact contacts[8];
-public:
-	PhoneBook(void);
-	~PhoneBook(void);
-
-	void add(void);
-};
+	std::cout << "Enter a First Name : ";
+	std::cin >> ;
+}
