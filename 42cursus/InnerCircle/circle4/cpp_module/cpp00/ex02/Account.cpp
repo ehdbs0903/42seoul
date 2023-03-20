@@ -6,7 +6,7 @@
 /*   By: doykim <doykim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 16:34:35 by doykim            #+#    #+#             */
-/*   Updated: 2023/03/20 17:15:10 by doykim           ###   ########.fr       */
+/*   Updated: 2023/03/20 17:19:43 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ Account::~Account()
 	_displayTimestamp();
 	std::cout << " index:" << _accountIndex << ";";
 	std::cout << "amount:" << _amount << ";";
-	std::cout << "closed" << ";" << std::endl;
+	std::cout << "closed"  << std::endl;
 }
 
 void Account::makeDeposit( int deposit )
@@ -108,7 +108,7 @@ bool Account::makeWithdrawal( int withdrawal )
 	}
 	else
 	{
-		std::cout << "withdrawal:refused" << ";" << std::endl;
+		std::cout << "withdrawal:refused" << std::endl;
 		_amount = p_amount;
 		return (false);
 	}
