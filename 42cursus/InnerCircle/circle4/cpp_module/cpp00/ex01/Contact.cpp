@@ -6,7 +6,7 @@
 /*   By: doykim <daykim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 21:01:20 by doykim            #+#    #+#             */
-/*   Updated: 2023/02/17 16:12:12 by doykim           ###   ########.fr       */
+/*   Updated: 2023/03/20 15:20:34 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ std::string Contact::getPhoneNumber(void) const
 {
 	return (this->phone_number);
 }
-std::string Contact::getDarksetSecret(void) const
+std::string Contact::getDarkestSecret(void) const
 {
 	return (this->darkest_secret);
 }
@@ -69,7 +69,7 @@ void Contact::setPhoneNumber(std::string str)
 	this->phone_number = str;
 }
 
-void Contact::setDarksetSecret(std::string str)
+void Contact::setDarkestSecret(std::string str)
 {
 	this->darkest_secret = str;
 }

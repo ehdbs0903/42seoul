@@ -6,7 +6,7 @@
 /*   By: doykim <daykim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 21:19:34 by doykim            #+#    #+#             */
-/*   Updated: 2023/02/19 19:34:58 by doykim           ###   ########.fr       */
+/*   Updated: 2023/03/20 15:54:50 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,23 @@
 
 int main(void)
 {
-	PhoneBook p1;
+	PhoneBook p;
 	std::string input;
 
 	while (1)
 	{
 		std::cout << "Enter Command : ";
-		std::cin >> input;
-		
+		std::getline(std::cin, input);
+
 		if (input == "ADD")
-			;
+			p.add();
 		else if (input == "SEARCH")
-			;
+			p.search();
 		else if (input == "EXIT")
+		{
+			std::cout << "Error: Invalid Command" << std::endl;
 			break;
-		else
-			std::cout << "??" << std::endl;
+		}
 	}
 	return (0);
 }
