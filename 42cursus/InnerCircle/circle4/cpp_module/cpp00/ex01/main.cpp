@@ -6,7 +6,7 @@
 /*   By: doykim <daykim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 21:19:34 by doykim            #+#    #+#             */
-/*   Updated: 2023/03/20 15:54:50 by doykim           ###   ########.fr       */
+/*   Updated: 2023/03/21 12:53:07 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,9 @@ int main(void)
 		else if (input == "SEARCH")
 			p.search();
 		else if (input == "EXIT")
-		{
-			std::cout << "Error: Invalid Command" << std::endl;
 			break;
-		}
+		else
+			std::cout << "Error: Invalid Command" << std::endl;
 	}
 	return (0);
 }
