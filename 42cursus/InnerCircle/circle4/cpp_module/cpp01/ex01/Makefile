@@ -1,4 +1,4 @@
-NAME = zombie
+NAME = zombiehorde
 CC = c++
 FLAGS = -Wall -Wextra -Werror
 

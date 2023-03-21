@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   Zombie.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: doykim <doykim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: doykim <doykim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 19:37:29 by doykim            #+#    #+#             */
-/*   Updated: 2023/03/20 20:52:30 by doykim           ###   ########.fr       */
+/*   Updated: 2023/03/21 14:53:47 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
+#include <sstream>
 
 class Zombie
 {
