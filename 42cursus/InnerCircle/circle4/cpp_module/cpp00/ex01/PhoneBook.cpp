@@ -92,11 +92,14 @@ void PhoneBook::search(void)
 			return;
 		else
 		{
-			std::cout << "FirstName: " << contacts[std::stoi(input) - 1].getFirstName() << std::endl
-			<< "LastName: " << contacts[std::stoi(input) - 1].getLastName() << std::endl
-			<< "Nickname: " << contacts[std::stoi(input) - 1].getNickname() << std::endl
-			<< "PhoneNumber: " << contacts[std::stoi(input) - 1].getPhoneNumber() << std::endl
-			<< "DarkestSecret: " << contacts[std::stoi(input) - 1].getDarkestSecret() << std::endl;
+			int idx;
+			std::stringstream ssInt(input);
+			ssInt >> idx;
+			std::cout << "FirstName: " << contacts[idx - 1].getFirstName() << std::endl
+			<< "LastName: " << contacts[idx - 1].getLastName() << std::endl
+			<< "Nickname: " << contacts[idx - 1].getNickname() << std::endl
+			<< "PhoneNumber: " << contacts[idx - 1].getPhoneNumber() << std::endl
+			<< "DarkestSecret: " << contacts[idx - 1].getDarkestSecret() << std::endl;
 			break;
 		}
 	}

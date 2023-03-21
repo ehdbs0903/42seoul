@@ -12,6 +12,7 @@
 
 #include <iostream>
 #include <iomanip>
+#include <sstream>
 
 class Contact
 {
