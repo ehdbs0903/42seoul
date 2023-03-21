@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PhoneBook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: doykim <daykim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: doykim <doykim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 16:09:20 by doykim            #+#    #+#             */
-/*   Updated: 2023/03/20 15:58:40 by doykim           ###   ########.fr       */
+/*   Updated: 2023/03/21 14:47:27 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void PhoneBook::add(void)
 	{
 		std::cout << message[i];
 		std::getline(std::cin, str[i]);
+		if (std::cin.eof() == true)
+			exit(0);
 		if (i == 3 && str[i] == "")
 		{
 			std::cout << "Error: Phone Number is blank" << std::endl;
@@ -83,6 +85,8 @@ void PhoneBook::search(void)
 		std::cout << "Index : ";
 		std::getline(std::cin, input);
 
+		if (std::cin.eof() == true)
+			exit(0);
 		if (input.size() == 0 || input < "0" || input > "8" || std::stoi(input) > i)
 		{
 			std::cin.clear();

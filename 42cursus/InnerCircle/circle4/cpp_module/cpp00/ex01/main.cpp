@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: doykim <daykim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: doykim <doykim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 21:19:34 by doykim            #+#    #+#             */
-/*   Updated: 2023/03/21 12:53:07 by doykim           ###   ########.fr       */
+/*   Updated: 2023/03/21 14:47:28 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int main(void)
 		std::cout << "Enter Command : ";
 		std::getline(std::cin, input);
 
+		if (std::cin.eof() == true)
+			exit(0);
 		if (input == "ADD")
 			p.add();
 		else if (input == "SEARCH")
