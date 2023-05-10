@@ -80,11 +80,6 @@ const char* AForm::GradeTooLowException::what() const throw()
 	return ("FormException: Grade too low");
 }
 
-const char* AForm::NotSignedException::what() const throw()
-{
-	return ("FormException: Not signed");
-}
-
 std::ostream& operator <<(std::ostream &out, AForm const &obj)
 {
 	out << obj.getName() << ", AForm grade to sign " << obj.getGradeToSign() << ", AForm grade to execute " << obj.getGradeToExecute() << ", AForm is ";

@@ -24,6 +24,8 @@ int main()
 		Intern Intern;
 		AForm *af;
 		af = Intern.makeForm("RobotomyRequestForm", "Bender");
+		Bureaucrat a("a", 150);
+		a.signForm(*af);
 		delete af;
 		af = Intern.makeForm("PresidentialPardonForm", "Bender");
 		delete af;

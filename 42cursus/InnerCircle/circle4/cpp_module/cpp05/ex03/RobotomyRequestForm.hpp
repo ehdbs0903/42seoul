@@ -28,12 +28,6 @@ public:
 	RobotomyRequestForm(std::string const target);
 
 	void execute(Bureaucrat const & executor) const;
-
-	class RobotomizationException : public std::exception
-	{
-		public:
-			virtual const char* what() const throw();
-	};
 };
 
 std::ostream& operator <<(std::ostream &out, RobotomyRequestForm const &obj);

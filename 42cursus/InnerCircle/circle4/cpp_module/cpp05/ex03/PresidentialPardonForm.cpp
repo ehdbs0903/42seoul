@@ -34,8 +34,3 @@ void PresidentialPardonForm::execute(Bureaucrat const & executor) const
 	AForm::execute(executor);
 	std::cout << _target << " has been pardoned by Zafod Beeblebrox." << std::endl;
 }
-
-const char* PresidentialPardonForm::PresidentialPardonException::what() const throw()
-{
-	return ("PresidentialPardonForm Exception: Grade is too low.");
-}

@@ -39,11 +39,6 @@ void RobotomyRequestForm::execute(Bureaucrat const & executor) const
 		std::cout << _target << " robotomization failed." << std::endl;
 }
 
-const char* RobotomyRequestForm::RobotomizationException::what() const throw()
-{
-	return ("Robotomization Error!");
-}
-
 std::ostream& operator <<(std::ostream &out, RobotomyRequestForm const &obj)
 {
 	out << obj.getName() << ", grade to sign " << obj.getGradeToSign() << ", grade to execute " << obj.getGradeToExecute() << ", is ";

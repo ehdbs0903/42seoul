@@ -52,11 +52,6 @@ const char* ShrubberyCreationForm::FileOpenException::what() const throw()
 	return ("File Open Error!");
 }
 
-const char* ShrubberyCreationForm::WriteException::what() const throw()
-{
-	return ("Write Error!");
-}
-
 std::ostream& operator <<(std::ostream &out, ShrubberyCreationForm const &obj)
 {
 	out << obj.getName() << ", grade to sign " << obj.getGradeToSign() << ", grade to execute " << obj.getGradeToExecute() << ", is ";

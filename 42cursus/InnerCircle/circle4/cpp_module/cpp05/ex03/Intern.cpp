@@ -6,7 +6,7 @@
 /*   By: doykim <doykim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 16:49:50 by doykim            #+#    #+#             */
-/*   Updated: 2023/05/09 17:06:02 by doykim           ###   ########.fr       */
+/*   Updated: 2023/05/10 14:56:12 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,20 +31,36 @@ Intern &Intern::operator=(Intern const &obj)
 	return (*this);
 }
 
+static AForm	*makePresident(const std::string target)
+{
+	return (new PresidentialPardonForm(target));
+}
+
+static AForm	*makeRobot(const std::string target)
+{
+	return (new RobotomyRequestForm(target));
+}
+
+static AForm	*makeShrubbery(const std::string target)
+{
+	return (new ShrubberyCreationForm(target));
+}
+
 AForm *Intern::makeForm(std::string const &formName, std::string const &target)
 {
-	AForm *form;
+	AForm *(*all_forms[])(const std::string target) = {&makePresident, &makeRobot, &makeShrubbery};
+	std::string forms[] = {"PresidentialPardonForm", "RobotomyRequestForm", "ShrubberyCreationForm"};
 
-	if (formName == "RobotomyRequestForm")
-		form = new RobotomyRequestForm(target);
-	else if (formName == "PresidentialPardonForm")
-		form = new PresidentialPardonForm(target);
-	else if (formName == "ShrubberyCreationForm")
-		form = new ShrubberyCreationForm(target);
-	else
-		throw Intern::InvalidFormNameException();
-	std::cout << "Intern creates " << formName << std::endl;
-	return (form);
+	for (int i = 0; i < 3; i++)
+	{
+		if (formName == forms[i])
+		{
+			std::cout << "Intern creates " << formName << " now" << std::endl;
+			return (all_forms[i](target));
+		}
+	}
+	throw InvalidFormNameException();
+	return NULL;
 }
 
 const char *Intern::InvalidFormNameException::what() const throw()
