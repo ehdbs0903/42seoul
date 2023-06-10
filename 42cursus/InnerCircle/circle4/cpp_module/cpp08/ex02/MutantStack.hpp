@@ -14,42 +14,27 @@
 # define MutantStack_HPP
 
 # include <iostream>
+# include <stack>
 
 template <typename T>
 class MutantStack : public std::stack<T>
 {
-private:
-	T *_stack;
-	int _size;
-	int _top;
-	int _maxSize;
 public:
-	MutantStack();
-	~MutantStack();
-	MutantStack(const MutantStack& obj);
-	MutantStack& operator=(const MutantStack& obj);
-
-	// int size() const;
-	// int top() const;
-	// void push(int val);
-	// void pop();
-	// int *begin();
-	// int *end();
-
-	class EmptyStackException : public std::exception
+	MutantStack() : std::stack<T>() {}
+	~MutantStack() {}
+	MutantStack(MutantStack const &other) : std::stack<T>(other) {}
+	MutantStack &operator=(MutantStack const &other)
 	{
-		virtual const char* what() const throw();
-	};
+		if (this != &other)
+			std::stack<T>::operator=(other);
+		return (*this);
+	}
 
-	class FullStackException : public std::exception
-	{
-		virtual const char* what() const throw();
-	};
+	typedef typename MutantStack<T>::stack::container_type::iterator iterator;
+	
+	iterator begin(void) {return this->c.begin();}
+	iterator end(void) {return this->c.end();}
 
-	class OutOfRangeException : public std::exception
-	{
-		virtual const char* what() const throw();
-	};
 };
 
 #endif

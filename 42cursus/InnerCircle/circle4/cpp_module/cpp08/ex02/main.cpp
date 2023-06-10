@@ -12,8 +12,14 @@
 
 #include "MutantStack.hpp"
 
+// void leak(void)
+// {
+// 	system("leaks ex02");
+// }
+
 int main()
 {
+	// atexit(leak);
 	MutantStack<int> mstack;
 	
 	mstack.push(5);
@@ -37,9 +43,16 @@ int main()
 	--it;
 	while (it != ite)
 	{
-	std::cout << *it << std::endl;
-	++it;
+		std::cout << *it << std::endl;
+		++it;
 	}
-	std::stack<int> s(mstack);
+	std::stack<int> s(mstack);//
+
+	std::cout << std::endl;
+	std::cout << "---------------------" << std::endl;
+	std::cout << std::endl;
+	std::cout << "s.top() : " << s.top() << std::endl;
+	std::cout << "mstack.top() : " << mstack.top() << std::endl;
+
 	return 0;
 }
