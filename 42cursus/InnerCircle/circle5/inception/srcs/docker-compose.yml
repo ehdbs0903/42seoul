@@ -1,0 +1,62 @@
+version: '3'
+
+services:
+  mariadb:
+    container_name: mariadb
+    build: ./requirements/mariadb
+    env_file:
+      - .env
+    volumes:
+      - db-volume:/var/lib/mysql
+    networks:
+      - intra
+    expose:
+      - 3306
+    restart: always
+
+  nginx:
+    container_name: nginx
+    build: ./requirements/nginx
+    depends_on:
+      - wordpress
+    volumes:
+      - wp-volume:/var/www/html
+    networks:
+      - intra
+    ports:
+      - 443:443
+    env_file:
+      - .env
+    restart: always
+
+  wordpress:
+    container_name: wordpress
+    build: ./requirements/wordpress
+    depends_on:
+      - mariadb
+    volumes:
+      - wp-volume:/var/www/html
+    networks:
+      - intra
+    env_file:
+      - .env
+    expose:
+      - 9000
+    restart: always
+
+volumes:
+  db-volume:
+    driver_opts:
+      device: /home/doykim/Inception/srcs/requirements/tools/data/mariadb
+      type: none
+      o: bind
+  
+  wp-volume:
+    driver_opts:
+      device: /home/doykim/Inception/srcs/requirements/tools/data/wordpress
+      type: none
+      o: bind
+
+networks:
+  intra:
+    driver: bridge
