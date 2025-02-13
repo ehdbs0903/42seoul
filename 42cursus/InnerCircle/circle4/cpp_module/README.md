@@ -7,9 +7,9 @@
 <details>
 <summary>Module 00 - Namespace, 클래스, 멤버 함수, stdio 스트림, 초기화 리스트, static</summary>
 
-- [ex00 - 문자열 조작 및 커맨드라인 인자 처리](./CPP00/ex00/)
-- [ex01 - 클래스, 객체 생성, 기본 I/O, 문자열 조작](./CPP00/ex01/)
-- [ex02 - 파일 재생성, C++ 프로그래밍, 객체 지향 설계](./CPP00/ex02/)
+- [ex00 - 문자열 조작 및 커맨드라인 인자 처리](./cpp00/ex00/)
+- [ex01 - 클래스, 객체 생성, 기본 I/O, 문자열 조작](./cpp00/ex01/)
+- [ex02 - 파일 재생성, C++ 프로그래밍, 객체 지향 설계](./cpp00/ex02/)
 
 **참고 자료:**
 - **C++의 OOP:** [GeeksforGeeks](https://www.geeksforgeeks.org/object-oriented-programming-in-cpp/)
@@ -26,13 +26,13 @@
 <details>
 <summary>Module 01 - 메모리 할당, 참조, 멤버 함수 포인터, 파일 스트림</summary>
 
-- [ex00 - 클래스, 멤버 함수, 포인터, 메모리 할당 (스택 vs. 힙), 소멸자](./CPP01/ex00/)
-- [ex01 - 객체 배열, 메모리 할당 (객체 배열), 객체 초기화](./CPP01/ex01/)
-- [ex02 - 포인터, 참조, 메모리 주소](./CPP01/ex02/)
-- [ex03 - 컴포지션, 집약, 객체 관계, 생성자, 세터](./CPP01/ex03/)
-- [ex04 - 파일 I/O, 새 파일로 내용 복사, 에러 처리](./CPP01/ex04/)
-- [ex05 - 멤버 함수, 멤버 함수 포인터, 열거형, 로깅](./CPP01/ex05/)
-- [ex06 - 스위치 문, 필터링, 로깅](./CPP01/ex06/)
+- [ex00 - 클래스, 멤버 함수, 포인터, 메모리 할당 (스택 vs. 힙), 소멸자](./cpp01/ex00/)
+- [ex01 - 객체 배열, 메모리 할당 (객체 배열), 객체 초기화](./cpp01/ex01/)
+- [ex02 - 포인터, 참조, 메모리 주소](./cpp01/ex02/)
+- [ex03 - 컴포지션, 집약, 객체 관계, 생성자, 세터](./cpp01/ex03/)
+- [ex04 - 파일 I/O, 새 파일로 내용 복사, 에러 처리](./cpp01/ex04/)
+- [ex05 - 멤버 함수, 멤버 함수 포인터, 열거형, 로깅](./cpp01/ex05/)
+- [ex06 - 스위치 문, 필터링, 로깅](./cpp01/ex06/)
   
   ### 참고 자료
 - **C++의 참조:** [GeeksforGeeks](https://www.geeksforgeeks.org/references-in-c/)
@@ -45,10 +45,10 @@
 <details>
 <summary>Module 02 - 애드혹 다형성, 연산자 오버로드, 캐노니컬 클래스</summary>
 
-- [ex00 - 고정 소수점 숫자, 정통 캐노니컬 폼](./CPP02/ex00/)
-- [ex01 - 생성자 (int와 float), 멤버 함수 (toFloat, toInt), 연산자 오버로드](./CPP02/ex01/)
-- [ex02 - 연산자 오버로드 (비교, 산술, 증가/감소), 정적 멤버 함수 (min, max)](./CPP02/ex02/)
-- [ex03 - 이진 공간 분할(BSP), 고정 소수점 산술, 삼각형 내부 점 포함 테스트](./CPP02/ex03/)
+- [ex00 - 고정 소수점 숫자, 정통 캐노니컬 폼](./cpp02/ex00/)
+- [ex01 - 생성자 (int와 float), 멤버 함수 (toFloat, toInt), 연산자 오버로드](./cpp02/ex01/)
+- [ex02 - 연산자 오버로드 (비교, 산술, 증가/감소), 정적 멤버 함수 (min, max)](./cpp02/ex02/)
+- [ex03 - 이진 공간 분할(BSP), 고정 소수점 산술, 삼각형 내부 점 포함 테스트](./cpp02/ex03/)
 
   ### 참고 자료
 - **고정 소수점 숫자 표현 소개:** [CS61c Spring 2006](https://inst.eecs.berkeley.edu//~cs61c/sp06/handout/fixedpt.html)
@@ -70,10 +70,10 @@
 <details>
 <summary>Module 03 - 상속</summary>
 
-- [ex00 - 클래스 구현](./CPP03ex00/)
-- [ex01 - 상속, 생성자/소멸자 체이닝, 멤버 함수 오버라이딩](./CPP03/ex01/)
-- [ex02 - 상속, 생성자/소멸자 체이닝, 멤버 함수 오버라이딩](./CPP03ex02/)
-- [ex03 - 다이아몬드 문제, 다중 상속, 생성자/소멸자 체이닝, 부모 클래스의 속성 및 멤버 함수 접근](./CPP03ex03/)
+- [ex00 - 클래스 구현](./cpp03ex00/)
+- [ex01 - 상속, 생성자/소멸자 체이닝, 멤버 함수 오버라이딩](./cpp03/ex01/)
+- [ex02 - 상속, 생성자/소멸자 체이닝, 멤버 함수 오버라이딩](./cpp03ex02/)
+- [ex03 - 다이아몬드 문제, 다중 상속, 생성자/소멸자 체이닝, 부모 클래스의 속성 및 멤버 함수 접근](./cpp03ex03/)
 
 ### 참고 자료
 - **상속과 다형성:** [YouTube](https://www.youtube.com/watch?v=wrkkAOMp3Sw)
@@ -87,10 +87,10 @@
 <details>
 <summary>Module 04 - 서브타입 다형성, 추상 클래스, 인터페이스</summary>
 
-- [ex00 - 다형성, 상속, 가상 함수](./CPP04/ex00/)
-- [ex01 - 메모리 관리, 깊은 복사](./CPP04/ex01/)
-- [ex02 - 추상 클래스](./CPP04/ex02/)
-- [ex03 - 인터페이스 / 순수 추상 클래스](./CPP04/ex03/)
+- [ex00 - 다형성, 상속, 가상 함수](./cpp04/ex00/)
+- [ex01 - 메모리 관리, 깊은 복사](./cpp04/ex01/)
+- [ex02 - 추상 클래스](./cpp04/ex02/)
+- [ex03 - 인터페이스 / 순수 추상 클래스](./cpp04/ex03/)
 
 ### 참고 자료
 - **C++의 다형성 | 컴파일 타임 vs. 런타임 다형성:** [YouTube](https://www.youtube.com/watch?v=uc_Hr10cBBE)
@@ -112,10 +112,10 @@
 <details>
 <summary>Module 05 - Try/Catch와 예외 처리</summary>
 
-- [ex00 - 예외 처리, 클래스 설계](./CPP05/ex00/)
-- [ex01 - 예외 처리, 클래스 설계, 멤버 함수](./CPP05/ex01/)
-- [ex02 - 추상 클래스, 상속, 다형성, 실행 로직](./CPP05/ex02/)
-- [ex03 - 팩토리 메소드, 클래스 설계, 문자열 조작](./CPP05/ex03/)
+- [ex00 - 예외 처리, 클래스 설계](../../circle5/cpp_module/cpp05/ex00/)
+- [ex01 - 예외 처리, 클래스 설계, 멤버 함수](../../circle5/cpp_module/cpp05/ex01/)
+- [ex02 - 추상 클래스, 상속, 다형성, 실행 로직](../../circle5/cpp_module/cpp05/ex02/)
+- [ex03 - 팩토리 메소드, 클래스 설계, 문자열 조작](../../circle5/cpp_module/cpp05/ex03/)
 
 ### 참고 자료
 - **예외 처리 - C++ 초보자 튜토리얼:** [NeuralNine](https://www.youtube.com/watch?v=5MI2N8yLdMI)
@@ -135,9 +135,9 @@
 <details>
 <summary>Module 06 - C++ 캐스트</summary>
 
-- [ex00 - 형 변환, static_cast](./CPP06/ex00/)
-- [ex01 - reinterpret_cast](./CPP06/ex01/)
-- [ex02 - dynamic_cast](./CPP06/ex02/)
+- [ex00 - 형 변환, static_cast](../../circle5/cpp_module/cpp06/ex00/)
+- [ex01 - reinterpret_cast](../../circle5/cpp_module/cpp06/ex01/)
+- [ex02 - dynamic_cast](../../circle5/cpp_module/cpp06/ex02/)
 
 ### 참고 자료
 - **C++의 형 변환:** [scaler](https://www.scaler.com/topics/cpp/type-conversion-in-cpp/)
@@ -156,9 +156,9 @@
 <details>
 <summary>Module 07 - C++ 템플릿</summary>
 
-- [ex00 - 템플릿 함수, swap, min, max](./CPP07/ex00/)
-- [ex01 - 템플릿을 사용한 반복](./CPP07/ex01/)
-- [ex02 - 템플릿 클래스](./CPP07/ex02/)
+- [ex00 - 템플릿 함수, swap, min, max](../../circle5/cpp_module/cpp07/ex00/)
+- [ex01 - 템플릿을 사용한 반복](../../circle5/cpp_module/cpp07/ex01/)
+- [ex02 - 템플릿 클래스](../../circle5/cpp_module/cpp07/ex02/)
 
 ### 참고 자료
 - **C++ 함수 템플릿:** [programiz](https://www.programiz.com/cpp-programming/function-template)
@@ -171,9 +171,9 @@
 <details>
 <summary>Module 08 - 템플릿 컨테이너, 반복자, 알고리즘</summary>
 
-- [ex00 - 함수 템플릿, 컨테이너 조작, 예외 처리](./CPP08/ex00/)
-- [ex01 - std::max, std::min, std::sort 예외 처리, 반복자](./CPP08/ex01/)
-- [ex02 - 반복자, 템플릿 특수화](./CPP08/ex02/)
+- [ex00 - 함수 템플릿, 컨테이너 조작, 예외 처리](../../circle5/cpp_module/cpp08/ex00/)
+- [ex01 - std::max, std::min, std::sort 예외 처리, 반복자](../../circle5/cpp_module/cpp08/ex01/)
+- [ex02 - 반복자, 템플릿 특수화](../../circle5/cpp_module/cpp08/ex02/)
 
 ### 참고 자료
 - **Back To Basics: C++ 컨테이너:** [javidx9](https://www.youtube.com/watch?v=6OoSgY6NVVk&ab_channel=javidx9)
@@ -190,9 +190,9 @@
 <details>
 <summary>Module 09 - STL</summary>
 
-- [ex00 - 파일 조작, std::map, 시간 파싱](./CPP09/ex00/)
-- [ex01 - 후위 표기법, std::stack, 입력 파싱](./CPP09/ex01/)
-- [ex02 - 병합 정렬 알고리즘, std::vector, std::deque, 입력 파싱](./CPP09/ex02/)
+- [ex00 - 파일 조작, std::map, 시간 파싱](../../circle5/cpp_module/cpp09/ex00/)
+- [ex01 - 후위 표기법, std::stack, 입력 파싱](../../circle5/cpp_module/cpp09/ex01/)
+- [ex02 - 병합 정렬 알고리즘, std::vector, std::deque, 입력 파싱](../../circle5/cpp_module/cpp09/ex02/)
 
 ### 참고 자료
 - **C++에서 부분 문자열 다루기:** [GeeksforGeeks](https://www.geeksforgeeks.org/substring-in-cpp/)
